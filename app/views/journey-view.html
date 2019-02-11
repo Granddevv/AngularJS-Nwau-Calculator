@@ -1,0 +1,104 @@
+<slide-out menu-visible="view.showJourneys">
+    <nav-bar>
+        <button type="button"
+                ng-model="view.showJourneys"
+                btn-checkbox
+                class="btn btn-default navbar-btn pull-left"
+                btn-checkbox-true="true"
+                btn-checkbox-false="false">
+            Journeys
+        </button>
+        <button type="button"
+                ui-sref="start"
+                class="btn btn-default navbar-btn pull-left glyphicon glyphicon-home">
+        </button>
+
+        <span class="pull-right compare-button" ng-if="compareJourneys.length > 0">
+            <button type="button"
+                    class="btn btn-default navbar-btn dropdown-toggle"
+                    data-toggle="dropdown">
+                Compare <b class="caret"></b></button>
+            <ul class="dropdown-menu">
+                <li ng-repeat="comparisonJourney in compareJourneys">
+                    <a ui-sref="compare({ journey1Id: journey.id, journey2Id: comparisonJourney.id })">
+                        {{ comparisonJourney.name }}
+                    </a>
+                </li>
+            </ul>
+        </span>
+
+        <button ng-click="delete()"
+                type="button"
+                class="btn btn-danger navbar-btn pull-right">
+            Delete
+        </button>
+
+        <nav-bar-title text="'Journey: ' + journey.name"></nav-bar-title>
+    </nav-bar>
+
+    <slide-out-menu>
+        <journey-list></journey-list>
+    </slide-out-menu>
+
+    <slide-out-container black-out="view.showJourneys">
+        <div class="horizontal-list row" ng-show="journey" id="frame">
+            <journey-summary
+                    journey="journey"
+                    ui-sref="editJourney({ journeyId: journey.id })"
+                    class="horizontal-list-item journey-list-item">
+            </journey-summary>
+            <h3 class="horizontal-list-child-text">Encounters</h3>
+            <encounter-summary
+                    ng-repeat="encounter in journey.encounters"
+                    ui-sref="encounter({ journeyId: journey.id, encounterId: encounter.id })"
+                    encounter="encounter"
+                    journey="journey"
+                    class="horizontal-list-item">
+            </encounter-summary>
+            <div class="panel panel-primary horizontal-list-item"
+                 ng-click="addEncounter()">
+                <div class="text-center add-encounter-btn">
+                    <add-button class="add-encounter-button"></add-button>
+                    Add Encounter
+                </div>
+            </div>
+        </div>
+    </slide-out-container>
+</slide-out>
+
+<script type="text/ng-template" id="suggestions-modal.html">
+    <div class="modal-header">
+        <h3>Peer Group Encounter Suggestions</h3>
+        <p>These options are common examples of next steps in the patient journey</p>
+    </div>
+    <div class="modal-body">
+        <div class="list-group">
+            <a ng-repeat="suggestion in suggestions"
+               ng-click="selected(suggestion)"
+               class="list-group-item">
+                    <h1 class="list-group-item-heading pull-right">{{ suggestion.percent | percentage }}</h1>
+                    <h4 class="list-group-item-heading">{{ suggestion.classification }}</h4>
+
+                    <p class="list-group-item-text">
+                        <span ng-if="suggestion.description.indexOf('Ungrouped Care Type') > 0">
+                            <help-btn icon="glyphicon-warning-sign"
+                                      class="pull-left warning-sign"
+                                      help="After 2014-2015 this option will no longer be priced. Please choose a Grouped SNAP option."
+                                      ng-click="$event.stopPropagation()">
+                            </help-btn>
+                        </span>
+                        {{ suggestion.description }}
+                    </p>
+            </a>
+            <a ng-click="selected()"
+               class="list-group-item">
+                <h4 class="list-group-item-heading">Make your own</h4>
+
+                <p class="list-group-item-text">Start an encounter from scratch</p>
+            </a>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+    </div>
+</script>

@@ -1,0 +1,61 @@
+<div class="journey-summary panel panel-primary">
+    <div class="panel-heading">
+        <h3 class="panel-title">{{ journey.name }}</h3>
+    </div>
+    <div class="panel-body">
+        <div ng-if="journey.encounters"
+             id="journey-{{ journey.id }}-chart"
+             class="journey-summary-chart summary-column">
+            <waterfall-chart container-id="journey-{{ journey.id }}-chart"
+                             type="bar"
+                             data="journeyPlot1"></waterfall-chart>
+        </div>
+
+        <div class="journey-summary-details summary-column">
+            <div class="summary-value summary-full-width">
+                <strong>Facility</strong>
+
+                <p>{{ journey.facility.Facilities }}</p>
+            </div>
+            <div class="summary-value summary-full-width">
+                <strong>Region</strong>
+
+                <p>{{ journey.region.description }}</p>
+            </div>
+            <div class="summary-value">
+                <strong>Private</strong>
+
+                <p>{{ journey.private | yesno}}</p>
+            </div>
+            <div class="summary-value">
+                <strong>Age</strong>
+
+                <p>{{ journey.age }}</p>
+            </div>
+            <div class="summary-value">
+                <strong>Indigenous</strong>
+
+                <p>{{ journey.indigenous | yesno }}</p>
+            </div>
+        </div>
+
+
+        <div ng-show="_.isEmpty(journey.encounters)">
+            <div class="row alert alert-warning">
+                Please add an encounter to view the NWAU for this journey.
+            </div>
+        </div>
+
+        <div class="nwau-value">
+            <strong>NWAU{{ journey.nwauVersion % 100 }}</strong>
+
+            <p>{{ journey.totalNwau | number: 4 }}</p>
+        </div>
+        <div class="nwau-value">
+            <strong>Funding</strong>
+
+            <p>${{ journey.totalPrice | number: 0 }}</p>
+        </div>
+    </div>
+
+</div>

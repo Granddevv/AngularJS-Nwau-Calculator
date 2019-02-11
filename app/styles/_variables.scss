@@ -1,0 +1,66 @@
+$border-radius-base:             0 !default;
+$border-radius-large:            0 !default;
+$border-radius-small:            0 !default;
+
+$body-bg:  #F9F9F9;
+$navbar-height: 44px;
+$body-padding: $navbar-height;
+$navbar-default-bg: #2B2B2B;
+$nav-text-color: $body-bg;
+
+$popover-max-width: 330px;
+
+$modal-header-border-color: $navbar-default-bg;
+$modal-content-border-color: $navbar-default-bg;
+$modal-footer-border-color: $navbar-default-bg;
+
+$panel-journey-list-heading-bg: $navbar-default-bg;
+$panel-journey-list-heading-color: $body-bg;
+$panel-journey-list-border: darken($panel-journey-list-heading-bg, 10%);
+
+$panel-primary-heading-bg: #67BCDB;
+$panel-primary-border: darken($panel-primary-heading-bg,10%);
+
+
+$panel-acute-heading-bg: #fb8335;
+$panel-acute-border: darken($panel-acute-heading-bg, 10%);
+$panel-edudg-heading-bg: #DE1B1B;
+$panel-edudg-border: darken($panel-edudg-heading-bg, 10%);
+$panel-edurg-heading-bg: #7D1935;
+$panel-edurg-border: darken($panel-edurg-heading-bg, 10%);
+$panel-snap-heading-bg: #4e5ece;
+$panel-snap-border: darken($panel-snap-heading-bg, 10%);
+$panel-non-admitted-heading-bg: #f47e7d;
+$panel-non-admitted-border: darken($panel-non-admitted-heading-bg, 10%);
+
+
+
+$btn-default-bg: darken($navbar-default-bg, 10%);
+$btn-default-border: darken($btn-default-bg, 10%);
+$btn-default-color: $body-bg;
+
+$btn-group-bg: #D0D0D0;
+
+$zindex-popover: 9999;
+
+$table-bg-hover: darken($body-bg, 3%);
+
+
+//legend
+$short-stay: #64c76a;
+$inlier: #4be04f;
+$long-stay: #01e88d;
+$total: #0040FF;
+$remoteness: #B43104;
+$paediatric: #00FFFF;
+$indigenous: #FF8000;
+$specialist-psych-age: #8000FF;
+$radiotherapy: #00FF00;
+$dialysis: #a52a2a;
+$multidisciplinaryteams: #008080;
+$intensive-care-unit: #6199CC;
+$private-accommodation: #FF0000;
+$private-service: #FA58F4;
+$emergency-care-age: #9eaa20;
+$price-weight: $total;
+$sep: #ff0d94;

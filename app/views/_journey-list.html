@@ -1,0 +1,31 @@
+<div class="panel panel-journey-list">
+    <div class="panel-heading"><span class="panel-title-big">Your Journeys</span>
+        <a ui-sref="editJourney()" class="pull-right glyphicon glyphicon-plus add-button"></a>
+    </div>
+    <div ng-if="journeys.length === 0"
+         class="panel-body">
+        <h3><a ui-sref="editJourney()">Add a journey</a> to get started.</h3>
+    </div>
+    <div class="list-group">
+        <a ng-repeat="journey in journeys"
+           ui-sref-active="active"
+           class="journey-list list-group-item">
+            <div ng-click="delete(journey)"
+                 class="glyphicon glyphicon-minus delete-button pull-right"></div>
+            <div ui-sref="journey({ journeyId: journey.id })" class="inline-input">
+                <div class="journey-list-heading">{{ journey.name }}</div>
+                <div ng-if="!_.isEmpty(journey.encounters)">
+                            <span class="journey-list-nwau">
+                                {{journey.totalNwau | number:4 }} NWAU{{ journey.nwauVersion %100}}
+                            </span>
+                            <span class="journey-list-nwau">
+                                ${{journey.totalPrice | number:0}}
+                            </span>
+                </div>
+                <div class="row" ng-if="_.isEmpty(journey.encounters)">
+                    <h3 class="list-group-item-text col-xs-12">No encounters</h3>
+                </div>
+            </div>
+        </a>
+    </div>
+</div>

@@ -1,0 +1,263 @@
+<div class="modal-header">
+    <h3>{{ title }}</h3>
+    <p>{{ subtitle }}</p>
+</div>
+<div class="modal-body">
+    <form role="form"
+          name="forms.drg"
+          ng-if="type === 'drg'">
+        <div class="form-group">
+            <label for="mdc" class="control-label">Select a Major Diagnostic Category (MDC)</label>
+            <help-btn placement="left"
+                      help="The diagnoses in each Major Diagnostic Category (MDC) correspond to a single organ system or etiology and, in general, are associated with a particular clinical specialty."></help-btn>
+            <div class="inline-input">
+                <select id="mdc"
+                        name="mdc"
+                        ng-model="model.mdc"
+                        ng-options="m for m in mdcs"
+                        required
+                        ng-required="true"
+                        ng-pattern="/.*/"
+                        class="dropdown">
+                    <option></option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group"
+             ng-if="model.mdc">
+            <label for="drg" class="control-label">Select a Diagnosis Related Group (DRG) from the selected MDC</label>
+            <help-btn placement="left"
+                      help="DRGs (or Diagnosis Related Groups) are mutually exclusive classes of patients that are clinically similar and relatively resource homogeneous. Assignment to a DRG is based on diagnoses, procedures, age, sex, discharge status, and the presence of complications or comorbidities"></help-btn>
+            <div class="inline-input">
+                <select id="drg"
+                        name="drg"
+                        ng-model="model.drg"
+                        ng-options="d.DRG + ' - ' + d.Description for d in drgs"
+                        required
+                        ng-required="true"
+                        ng-pattern="/.*/"
+                        class="dropdown">
+                    <option></option>
+                </select>
+            </div>
+        </div>
+    </form>
+
+
+    <form role="form"
+          name="forms.ansnap"
+          ng-if="type === 'ansnap'">
+        <div class="form-group">
+            <label for="episodeType" class="control-label">Select a Care Type</label>
+            <help-btn placement="left"
+                      help="'Care type' refers to the overall nature of a clinical service provided to an admitted patient during an episode of admitted patient care."></help-btn>
+            <div class="inline-input">
+                <select id="episodeType"
+                        name="episodeType"
+                        ng-model="model.episodeType"
+                        ng-options="e for e in episodeTypes"
+                        required
+                        ng-required="true"
+                        ng-pattern="/.*/"
+                        class="dropdown">
+                    <option></option>
+                </select>
+            </div>
+        </div>
+        <!--Select Group for NWAU2014-->
+        <div ng-if="model.episodeType && nwauVersion<2015" class="form-group">
+            <label for="grouped" class="control-label">Select a Grouping</label>
+            <help-btn placement="left"
+                      help="Grouped activity is activity for which sufficient clinical information has been collected for an AN-SNAP class to be assigned. Ungrouped activity has no AN-SNAP class assigned."></help-btn>
+            <div class="inline-input">
+                <select id="grouped"
+                        name="grouped"
+                        ng-model="model.grouped"
+                        ng-options="g for g in groupedList"
+                        required
+                        ng-required="true"
+                        ng-pattern="/.*/"
+                        class="dropdown">
+                    <option></option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group"
+             ng-if="model.episodeType && model.grouped">
+            <label for="ansnap" class="control-label">
+                <span ng-if="model.grouped === 'Grouped'">Select an AN-SNAP class from the selected Care Type</span>
+                <span ng-if="model.grouped === 'Ungrouped'">Sub-acute and Non Admitted Class</span>
+            </label>
+            <help-btn ng-if="model.grouped === 'Grouped'"
+                      placement="left"
+                      help="Select an AN-SNAP class from the options available in the drop down list."></help-btn>
+            <help-btn ng-if="model.grouped === 'Ungrouped'"
+                      placement="left"
+                      help="Select an ungrouped care type. Ungrouped SNAP activity will attract zero (0) NWAU from 1 July 2015 onwards."></help-btn>
+            <div class="inline-input">
+                <select ng-if="model.grouped === 'Grouped'"
+                        id="ansnap"
+                        name="ansnap"
+                        ng-model="model.ansnap"
+                        ng-options="a.ANSNAP + ' - ' + a.Description for a in ansnaps"
+                        required
+                        ng-required="true"
+                        ng-pattern="/.*/"
+                        class="dropdown">
+                    <option></option>
+                </select>
+                <select ng-if="model.grouped === 'Ungrouped'"
+                        id="ansnap"
+                        name="ansnap"
+                        ng-model="model.ansnap"
+                        ng-options="a.Description for a in ansnaps"
+                        required
+                        ng-required="true"
+                        ng-pattern="/.*/"
+                        class="dropdown">
+                    <option></option>
+                </select>
+            </div>
+        </div>
+
+        <!--Select Mental health/Non-mental health for NWAU2015-->
+        <div ng-if="model.episodeType && nwauVersion>2014" class="form-group">
+            <label for="healthType" class="control-label">Select Mental Health or Non-mental Health</label>
+            <help-btn placement="left"
+                      help="Select Mental Health if this episode will occur in a specialist mental health unit otherwise select Non-mental Health"></help-btn>
+            <div class="inline-input">
+                <select id="healthType"
+                        name="healthType"
+                        ng-model="model.healthType"
+                        ng-options="g for g in healthTypeList"
+                        required
+                        ng-required="true"
+                        ng-pattern="/.*/"
+                        class="dropdown">
+                    <option></option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group"
+             ng-if="model.episodeType && model.healthType">
+            <label for="ansnap" class="control-label">
+                <span ng-if="model.healthType === 'Mental Health'">Class</span>
+                <span ng-if="model.healthType === 'Non-mental Health'">Select an AN-SNAP class</span>
+            </label>
+            
+            <div class="inline-input">
+                <select id="ansnap"
+                        name="ansnap"
+                        ng-model="model.ansnap"
+                        ng-options="a.ANSNAP + ' - ' + a.Description for a in ansnaps"
+                        required
+                        ng-required="true"
+                        ng-pattern="/.*/"
+                        class="dropdown">
+                    <option></option>
+                </select>                
+            </div>
+        </div>
+    </form>
+
+    <form role="form"
+          name="forms.edurg"
+          ng-if="type === 'edurg'">
+        <div class="form-group">
+            <label for="visit-type" class="control-label">Select a visit type</label>
+            <help-btn placement="left"
+                      help="Select the basis of the vist to the Emergency Department."></help-btn>
+            <div class="inline-input">
+                <select id="visit-type"
+                        name="visit-type"
+                        ng-model="model.visitType"
+                        ng-options="v for v in visitTypes"
+                        required
+                        ng-required="true"
+                        ng-pattern="/.*/"
+                        class="dropdown">
+                    <option></option>
+                </select>
+            </div>
+        </div>
+        <div ng-if="model.visitType"
+             class="form-group">
+            <label for="episode-end-status" class="control-label">Select an episode end status</label>
+            <help-btn placement="left"
+                      help="Select the status of the patient at the end of the Emergency Department encounter."></help-btn>
+            <div class="inline-input">
+                <select id="episode-end-status"
+                        name="episode-end-status"
+                        ng-model="model.episodeEndStatus"
+                        ng-options="e for e in episodeEndStatuses"
+                        required
+                        ng-required="true"
+                        ng-pattern="/.*/"
+                        class="dropdown">
+                    <option></option>
+                </select>
+            </div>
+        </div>
+        <div ng-if="model.visitType && model.episodeEndStatus"
+             class="form-group">
+            <label for="triage" class="control-label">Select a triage level</label>
+            <help-btn placement="left"
+                      help="Select a triage level. The triage level is an assessment by the Triage Nurse of the urgency of the patients need for medical and nursing care. A level of &quot;1&quot; is of the greatest urgency."></help-btn>
+            <div class="inline-input">
+                <select id="triage"
+                        name="triage"
+                        ng-model="model.triage"
+                        ng-options="t for t in triages"
+                        required
+                        ng-required="true"
+                        ng-pattern="/.*/"
+                        class="dropdown">
+                    <option></option>
+                </select>
+            </div>
+        </div>
+        <div ng-if="model.visitType && model.episodeEndStatus && model.triage" class="form-group">
+            <label for="mdb" class="control-label">Select a Major Diagnostic Block (MDB)</label>
+            <help-btn placement="left"
+                      help="Select the Major Diagnostic Block (MDB) related to the patient's diagnosis. The MDB is the category into which the patient's URG is grouped."></help-btn>
+            <div class="inline-input">
+                <select id="mdb"
+                        name="mdb"
+                        ng-model="model.mdb"
+                        ng-options="m for m in mdbs"
+                        required
+                        ng-required="true"
+                        ng-pattern="/.*/"
+                        class="dropdown">
+                    <option></option>
+                </select>
+            </div>
+        </div>
+
+        <div ng-if="model.visitType && model.episodeEndStatus && model.triage && model.mdb" class="form-group">
+            <label for="edurg" class="control-label">Available Urgency Related Groups (URG)</label>
+            <help-btn placement="left"
+                      help="Select a URG. The URG is the patient classification scheme used for patients treated in the Emergency Department of facilities with a level 3B-6 Emergency Department"></help-btn>
+            <div class="inline-input">
+                <select id="edurg"
+                        name="edurg"
+                        ng-model="model.edurg"
+                        ng-options="u.urgId + ' - ' + u.description for u in urgs"
+                        required
+                        ng-required="true"
+                        ng-pattern="/.*/"
+                        class="dropdown">
+                    <option></option>
+                </select>
+            </div>
+        </div>
+
+    </form>
+
+
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary" ng-click="ok()">OK</button>
+    <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+</div>

@@ -1,0 +1,22 @@
+.journey-list.list-group-item {
+  min-height: 90px;
+}
+
+.journey-list-nwau,
+.journey-list-price {
+  font-size: 25px;
+  margin: 0 10px;
+}
+
+.journey-list-heading {
+  font-size: 20px;
+}
+
+.panel-journey-list {
+  border-color: $panel-journey-list-border;
+}
+
+.panel-journey-list > .panel-heading{
+  background-color: $panel-journey-list-heading-bg;
+  color: $panel-journey-list-heading-color;
+}

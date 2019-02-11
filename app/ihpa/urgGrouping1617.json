@@ -1,0 +1,37 @@
+{ "urgGrouping":[ 
+{
+"visitType": "Emergency presentation",
+"episodeEndStatus": "Transferred to admitted patient care within the same facility",
+"triage": "Triage 1 (Resuscitation)",
+"mdb": "Injury, single site, major",
+"urgId": "3",
+"description": "Adm_T1_Injury"}, 
+{
+"visitType": "Emergency presentation",
+"episodeEndStatus": "Transferred to admitted patient care within the same facility",
+"triage": "Triage 1 (Resuscitation)",
+"mdb": "Injury, single site, minor",
+"urgId": "3",
+"description": "Adm_T1_Injury"}, 
+{
+"visitType": "Emergency presentation",
+"episodeEndStatus": "Transferred to admitted patient care within the same facility",
+"triage": "Triage 1 (Resuscitation)",
+"mdb": "Injury, multiple sites",
+"urgId": "3",
+"description": "Adm_T1_Injury"}, 
+{
+"visitType": "Pre-arranged admission",
+"episodeEndStatus": "Transferred to admitted patient care within the same facility",
+"triage": "Triage 1 (Resuscitation)",
+"mdb": "Injury, single site, major",
+"urgId": "3",
+"description": "Adm_T1_Injury"}, 
+{
+"visitType": "Pre-arranged admission",
+"episodeEndStatus": "Transferred to admitted patient care within the same facility",
+"triage": "Triage 1 (Resuscitation)",
+"mdb": "Injury, single site, minor",
+"urgId": "3",
+"description": "Adm_T1_Injury"}
+]}

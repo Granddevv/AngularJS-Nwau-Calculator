@@ -1,0 +1,144 @@
+<form name="forms.journeyForm"
+      novalidate
+      role="form">
+    <div ng-class="{ 'has-error': forms.journeyForm.name.$invalid && !forms.journeyForm.name.$pristine }"
+         class="form-group">
+        <label for="description"
+               class="control-label">
+            Journey Name
+        </label>
+        <help-btn placement="left"
+                  help="Please enter a unique name for this journey. The journey screen encompasses the  hospital and patient characteristics that will be used throughout this journey."
+                  class="pull-right"></help-btn>
+        <div class="inline-input">
+            <input id="description"
+                   required
+                   ng-required="true"
+                   ng-change="change()"
+                   name="name"
+                   type="text"
+                   class="form-control"
+                   placeholder="The name for this journey"
+                   ng-model="journey.name">
+        </div>
+    </div>
+
+    <div ng-class="{ 'has-error': forms.journeyForm.facility.$invalid && !forms.journeyForm.facility.$pristine }"
+         class="form-group">
+        <label for="facility"
+               class="control-label">
+            Facility: ABF Only
+        </label>
+        <help-btn placement="left"
+                  help="Select the name of the hospital in which the journey will occur. Different facilities have different attributes that will impact the NWAU value. (for example, it determines the eligibility for ICU loading)"
+                  class="pull-right"></help-btn>
+        <div class="inline-input">
+            <input ng-model="journey.facility"
+                   typeahead="facility as facility.description for facility in facilities | filter:{description:$viewValue} | limitTo:20"
+                   typeahead-editable="false"
+                   typeahead-on-select="change()"
+                   ng-change="change()"
+                   required
+                   ng-required="true"
+                   name="facility"
+                   id="facility"
+                   type="search"
+                   class="form-control"
+                   placeholder="The facility for this journey">
+        </div>
+    </div>
+
+    <div ng-class="{ 'has-error': forms.journeyForm.age.$invalid && !forms.journeyForm.age.$pristine }"
+         class="form-group">
+        <label for="age"
+               class="control-label">
+            Age
+        </label>
+        <help-btn placement="left"
+                  help="Enter an age for your patient. The patients age may impact the NWAU value in the Acute and Sub-acute parts of the journey"
+                  class="pull-right"></help-btn>
+        <input id="age"
+               type="number"
+               required
+               ng-required="true"
+               ng-change="change()"
+               ng-pattern="/[0-9]*/"
+               name="age"
+               min="0"
+               class="form-control  pull-left"
+               ng-model="journey.age">
+        <div class="inline-input">
+            <div slider
+                 min="0"
+                 max="100"
+                 value="journey.age"
+                 labels="{ 17: '17', 65: '65', 85: '85'}"
+                 change="change()"
+                 id="age-slider"
+                 class="pull-right"></div>
+        </div>
+    </div>
+
+    <div ng-class="{ 'has-error': forms.journeyForm.postcode.$invalid && !forms.journeyForm.postcode.$pristine }"
+         class="form-group">
+        <label for="postcode"
+               class="control-label">
+            Home postcode of patient
+            <span ng-if="forms.journeyForm.postcode.$invalid && !forms.journeyForm.postcode.$pristine">must be selected from the list</span>
+        </label>
+        <help-btn placement="left"
+                  help="This is the postcode of the usual residence of the patient NOT the postcode of the facility. Patients living in rural and remote areas may attract a loading to the NWAU."
+                  class="pull-right"></help-btn>
+        <div class="inline-input">
+            <input ng-model="journey.region"
+                   typeahead="region as region.description for region in regions | filter:{description:$viewValue} | limitTo:20"
+                   typeahead-editable="false"
+                   typeahead-on-select="change()"
+                   required
+                   ng-change="change()"
+                   ng-required="true"
+                   name="postcode"
+                   id="postcode"
+                   type="search"
+                   class="form-control">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label">Private</label>
+        <help-btn placement="left"
+                  help="Select whether or not the patient elects to use their private health insurance. If the patient elects to use their private health insurance, the total NWAU for the journey will be discounted to reflect the revenue received from the insurer."
+                  class="pull-right"></help-btn>
+        <switch-control model="journey.private"
+                        true-label="Yes"
+                        false-label="No"
+                        change="change()">
+        </switch-control>
+
+    </div>
+
+    <div class="form-group">
+        <label class="control-label">Indigenous</label>
+        <help-btn placement="left"
+                  help="Select whether or not the patient identifies as being Aboriginal or Torres Strait Islander. All patients who identify as Aboriginal or Torres Strait Islander receive a loading."
+                  class="pull-right"></help-btn>
+        <switch-control model="journey.indigenous"
+                        true-label="Yes"
+                        false-label="No"
+                        change="change()">
+        </switch-control>
+    </div>
+    <div class="form-group">
+        <label class="control-label">NWAU Version</label>
+        <help-btn placement="left"
+                  help="Select the NWAU version to be used. Each financial year classification weights and prices may potentially change. The calculator applies the appropriate values for the version selected."
+                  class="pull-right"></help-btn>
+        <year-control model="journey.nwauVersion"
+                      left-value="currentYear.value"
+                      right-value="previousYear.value"
+                      left-label="currentYear.label"
+                      right-label="previousYear.label"
+                      >
+        </year-control>
+    </div>
+</form>

@@ -1,0 +1,52 @@
+.slide-out {
+  height: 100%;
+  width: 100%;
+}
+
+.slide-out-container {
+  height: 100%;
+  width: 100%;
+  z-index: 0;
+}
+
+.slide-out-menu {
+  position: fixed;
+  left: -500px;
+  width: 500px;
+  max-width: 400px;
+  height: 100%;
+  //z-index: 2000;  Mark
+  z-index: 1050;
+  background-color: #f4f8fa;
+  border-right: 1px solid darken($navbar-default-bg, 10%);
+  overflow: hidden;
+
+  -webkit-transition: all .3s linear;
+  -moz-transition:    all .3s linear;
+  -ms-transition:     all .3s linear;
+  -o-transition:      all .3s linear;
+  transition:         all .3s linear;
+}
+
+.slide-out-menu-scrollable {
+  width: 100%;
+  height: 99%;
+  overflow: auto;
+  padding-bottom: 100px;
+}
+
+.slide-out-menu * .panel-journey-list {
+  border: none;
+}
+
+@media (max-width: $screen-sm-max) {
+  .slide-out-menu {
+    left: -300px;
+    width: 300px;
+    max-width: 300px;
+  }
+}
+
+.slide-out.active > .slide-out-menu {
+  left: 0;
+}

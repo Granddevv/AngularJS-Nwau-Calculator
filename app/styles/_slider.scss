@@ -1,0 +1,27 @@
+.ui-slider-wrapper {
+  margin-top: 10px;
+  margin-left: 15px;
+  width: 90% !important;
+  display: inline-block;
+  overflow: visible;
+}
+
+.ui-slider-wrapper.horizontal {
+  height: 2.5em;
+}
+
+.ui-slider-horizontal .ui-slider-handle {
+  top: -0.6em;
+  margin-left: -1em;
+  z-index: 10;
+}
+.ui-slider .ui-slider-handle {
+  width: 2.0em;
+  height: 2.0em;
+}
+
+@media screen and (max-width: $screen-xs-max) {
+  .ui-slider-wrapper {
+    width: 85% !important;
+  }
+}

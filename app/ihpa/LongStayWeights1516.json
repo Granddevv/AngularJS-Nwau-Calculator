@@ -1,0 +1,8 @@
+{ "LongStayWeights":[ 
+{
+"CareType": "Acute",
+"NWAUPerDay": 0.2027}, 
+{
+"CareType": "Subacute",
+"NWAUPerDay": 0.1625}
+]}

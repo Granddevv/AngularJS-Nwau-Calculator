@@ -1,0 +1,30 @@
+<nav-bar class="nav-fixed-top">
+    <button ui-sref="journey({journeyId: journey1.id})"
+            class="btn btn-primary navbar-btn pull-right">
+        Done
+    </button>
+    <nav-bar-title text="'Journey Comparison'"></nav-bar-title>
+</nav-bar>
+<div class="page-margin compare-page">
+    <div compare-page-margin class="row journeys">
+        <div ng-repeat="journey in combinedJourneys"
+             class="col-xs-6"
+             ng-class="'journey-' + $index">
+            <journey-summary
+                    journey="journey">
+            </journey-summary>
+        </div>
+    </div>
+    <div ng-repeat="encounters in combinedEncounters"
+         class="row">
+        <div ng-repeat="encounter in encounters"
+             class="col-xs-6"
+             ng-class="'journey-' + $index">
+            <encounter-summary
+                    encounter="encounter"
+                    ng-if="encounter"
+                    journey="combinedJourneys[$index]">
+            </encounter-summary>
+        </div>
+    </div>
+</div>

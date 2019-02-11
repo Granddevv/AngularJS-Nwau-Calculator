@@ -1,0 +1,56 @@
+.journey-summary-chart {
+  height: 250px;
+}
+
+.stacked-bar-chart {
+  height: 300px;
+}
+
+.summary-value {
+  width: 100%;
+  position: relative;
+  padding-left: 15px;
+  padding-right: 15px;
+  float: left;
+}
+
+.summary-value > p {
+  white-space: normal;
+  word-break: break-word;
+}
+
+.nwau-value {
+  width: 50%;
+  position: relative;
+  padding-left: 15px;
+  padding-right: 15px;
+  float: left;
+}
+
+.nwau-value p {
+  font-size: 25px;
+}
+
+@media screen and (max-width: $screen-xs-max), screen and (max-height: 750px) {
+  .stacked-bar-chart {
+    height: 240px;
+  }
+
+  .journey-summary-chart {
+    height: 250px;
+  }
+
+  .summary-value {
+    width: 50%;
+  }
+
+  .summary-full-width {
+    width: 100%;
+  }
+
+  .summary-column {
+    width: 50%;
+    display: inline-block;
+    vertical-align: top;
+  }
+}

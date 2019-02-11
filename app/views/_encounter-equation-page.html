@@ -1,0 +1,263 @@
+<div class="row page-margin">
+    <div ng-if="encounter.classification === 'Acute Admitted' && journey.nwauVersion >= 2014" class="text-center">
+        <h2>{[<span class="price-weight">PW</span>
+            x
+            <span ng-class="{paediatric:encounter.nwauCalculation.A_PAED>1}">A<sub>Paed</sub></span>
+            x (1 +
+            <span ng-class="{'specialist-psych-age':encounter.nwauCalculation.A_SPA>0}">A<sub>SPA</sub></span>) x (1 +
+            <span ng-class="{indigenous:encounter.nwauCalculation.A_IND>0}">A<sub>Ind</sub></span>
+            +
+            <span ng-class="{remoteness:encounter.nwauCalculation.A_A>0}">A<sub>A</sub></span>
+            +
+            <span ng-class="{radiotherapy:encounter.nwauCalculation.A_RT>0}">A<sub>RT</sub></span>
+            <span ng-if="journey.nwauVersion>2014 && encounter.drg.id!=='L61Z' && encounter.drg.id!=='L68Z'">+ <span ng-class="{dialysis: encounter.nwauCalculation.A_DIA>0}">A<sub>Dia</sub></span></span>) + (
+            <span ng-class="{'intensive-care-unit':encounter.nwauCalculation.A_ICU > 0 && encounter.icuHours > 0}">A<sub>ICU</sub> x ICU hours</span>)] - [(
+            <span ng-class="{'price-weight': encounter.nwauCalculation.A_PPS>0 || encounter.nwauCalculation.A_ICU > 0 && encounter.icuHours > 0}">PW</span>
+            +
+            <span ng-class="{'intensive-care-unit':encounter.nwauCalculation.A_ICU > 0 && encounter.icuHours > 0}">A<sub>ICU</sub> x ICU hours</span>)
+            x
+            <span ng-class="{'private-service':encounter.nwauCalculation.A_PPS>0}">A<sub>PPS</sub></span>
+            +
+            <span ng-class="{'private-accommodation':encounter.nwauCalculation.A_ACC>0}">LOS x A<sub>Acc</sub></span>]} x
+            <span class="sep">SP</span></h2>
+    </div>
+
+    <div ng-show="encounter.classification === 'SNAP'" class="text-center">
+        <h2>{[
+            <span class="price-weight">PW</span>
+            x
+           <span ng-if="journey.nwauVersion <= 2014 || (encounter.ansnap.episodeType=='Rehabilitation' || encounter.ansnap.episodeType=='Maintenance') && (encounter.ansnap.healthType=='Mental Health')"><span ng-class="{paediatric:encounter.nwauCalculation.A_PAED>1}">A<sub>Paed</sub></span> x</span>
+            (1 +
+            <span ng-class="{indigenous:encounter.nwauCalculation.A_IND>0}">A<sub>Ind</sub></span>
+            +
+            <span ng-class="{remoteness:encounter.nwauCalculation.A_A>0}">A<sub>A</sub></span>
+            )] - [
+            <span ng-class="{'price-weight': encounter.nwauCalculation.A_PPS>0}">PW</span>
+            x
+            <span ng-class="{'private-service': encounter.nwauCalculation.A_PPS>0}">A<sub>PPS</sub></span>
+            +
+            <span ng-class="{'private-accommodation':encounter.nwauCalculation.A_ACC>0}">LOS x A<sub>Acc</sub></span>
+            ]} x
+            <span class="sep">SP</span>
+        </h2>
+    </div>
+
+
+    <div ng-if="encounter.classification === 'Non Admitted' || encounter.classification === 'Emergency Department UDG' || encounter.classification== 'Emergency Department URG'"
+         class="text-center">
+        <h2>{
+            <span class="price-weight">PW</span>
+            x (1 +
+            <span ng-class="{indigenous:encounter.nwauCalculation.A_IND>0}">A<sub>Ind</sub></span>
+
+            <!--<span ng-if="journey.nwauVersion > 2014 && encounter.classification === 'Non Admitted'">+ <span ng-class="{multidisciplinaryteams: encounter.nwauCalculation.A_NMC>0}">A<sub>NMC</sub></span></span>-->
+
+              <!--Mark-->
+            <span ng-if="journey.nwauVersion < 2016 && encounter.classification === 'Non Admitted'">+ <span ng-class="{multidisciplinaryteams: encounter.nwauCalculation.A_NMC>0}">A<sub>NMC</sub></span></span>
+
+            <span ng-if="journey.nwauVersion > 2015 && encounter.classification === 'Non Admitted'">) x (1 + <span ng-class="{multidisciplinaryteams: encounter.nwauCalculation.A_NMC>0}">A<sub>NMC</sub></span></span>
+            )
+
+            <span ng-if="journey.nwauVersion > 2015 && encounter.classification === 'Emergency Department UDG'">
+            x (1 +
+            <span ng-class="{emergencyCareAge:encounter.nwauCalculation.A_ECA>0}">A<sub>ECA</sub></span>
+            )
+            </span>
+            <span ng-if="journey.nwauVersion > 2015 && encounter.classification === 'Emergency Department URG'">
+            x (1 +
+            <span ng-class="{emergencyCareAge:encounter.nwauCalculation.A_ECA>0}">A<sub>ECA</sub></span>
+            )
+            </span>
+            } x
+            <span class="sep">SP</span></h2>
+            <!--* (1 + AEca)-->
+    </div>
+
+    <div class="col-md-offset-1 col-md-5 col-xs-12">
+        <table class="table table-hover table-condensed">
+            <thead>
+            <tr>
+                <th></th>
+                <th colspan="1">Parameters</th>
+                <th colspan="1">Value</th>
+
+            </tr>
+            </thead>
+            <tbody>
+            <tr chart-value type="sep"
+                caption="State Price (SP)"
+                value="encounter.nwauCalculation.SEP | currencyWhole">
+            </tr>
+            </tbody>
+            <tbody ng-if="encounter.classification === 'Acute Admitted' && journey.nwauVersion <= 2014">
+            <tr chart-value type="price-weight"
+                caption="Price Weight (Short Stay Base + (Short Stay Outlier * LOS))"
+                value="encounter.nwauCalculation.adjustments.shortStay | numberWholeZero:4">
+            </tr>
+            <tr chart-value type="price-weight"
+                caption="Price Weight (Inlier)"
+                value="encounter.nwauCalculation.PW | numberWholeZero:4">
+            </tr>
+            <tr chart-value type="price-weight"
+                caption="Price Weight (Long Stay Outlier * (LOS - Upper Bound))"
+                value="encounter.nwauCalculation.adjustments.longStay | numberWholeZero:4">
+            </tr>
+            <tr chart-value type="price-weight"
+                caption="Price Weight (Total)"
+                value="encounter.nwauCalculation.PWactual | numberWholeZero:4">
+            </tr>
+            </tbody>
+
+            <tbody ng-if="encounter.classification === 'Acute Admitted' && journey.nwauVersion > 2014">
+            <tr chart-value type="price-weight"
+                caption="Price Weight (Short Stay Base + (Short Stay Outlier * LOS))"
+                value="encounter.nwauCalculation.adjustments.shortStay | numberWholeZero:4">
+            </tr>
+            <tr chart-value type="price-weight"
+                caption="Price Weight (Inlier)"
+                value="encounter.nwauCalculation.PW | numberWholeZero:4">
+            </tr>
+            <tr chart-value type="price-weight"
+                caption="Price Weight (Long Stay Outlier * (LOS - UpperBound))"
+                value="encounter.nwauCalculation.adjustments.longStay | numberWholeZero:4">
+            </tr>
+            <tr chart-value type="price-weight"
+                caption="Price Weight (Total)"
+                value="encounter.nwauCalculation.PWactual | numberWholeZero:4">
+            </tr>
+            </tbody>
+
+
+            <tbody ng-if="encounter.classification=='SNAP' && journey.nwauVersion <= 2014">
+            <tr chart-value type="price-weight"
+                caption="Short Stay Price Weight (LOS * OutlierPerDiem)"
+                value="encounter.nwauCalculation.adjustments.shortStay | numberWholeZero:4">
+            </tr>
+            <tr chart-value type="price-weight"
+                caption="Price Weight (Episode + InlierPerDiem * min(LOS, UpperBound))"
+                value="encounter.nwauCalculation.PW | numberWholeZero:4">
+            </tr>
+            <tr chart-value type="price-weight"
+                caption="Price Weight ((OutlierPerDiem * (LOS - UpperBound))"
+                value="encounter.nwauCalculation.adjustments.longStay | numberWholeZero:4">
+            </tr>
+            <tr chart-value type="price-weight"
+                caption="Price Weight (Total)"
+                value="encounter.nwauCalculation.PWactual | numberWholeZero:4">
+            </tr>
+            </tbody>
+
+            <tbody ng-if="encounter.classification=='SNAP' && journey.nwauVersion > 2014">
+            <tr chart-value type="price-weight"
+                caption="Price Weight (Short Stay Outlier * LOS)"
+                value="encounter.nwauCalculation.adjustments.shortStay | numberWholeZero:4">
+            </tr>
+            <tr chart-value type="price-weight"
+                caption="Price Weight (Inlier)"
+                value="encounter.nwauCalculation.PW | numberWholeZero:4">
+            </tr>
+            <tr chart-value type="price-weight"
+                caption="Price Weight (Long Stay Outlier * (LOS - UpperBound))"
+                value="encounter.nwauCalculation.adjustments.longStay | numberWholeZero:4">
+            </tr>
+            <tr chart-value type="price-weight"
+                caption="Price Weight (Total)"
+                value="encounter.nwauCalculation.PWactual | numberWholeZero:4">
+            </tr>
+            </tbody>
+
+            <tbody ng-if="encounter.classification === 'Non Admitted' || encounter.classification === 'Emergency Department UDG' || encounter.classification== 'Emergency Department URG'">
+            <tr chart-value type="price-weight"
+                caption="Price Weight"
+                value="encounter.nwauCalculation.PW | numberWholeZero:4">
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="col-md-5 col-xs-12">
+        <table class="table table-hover table-condensed ">
+            <thead>
+            <tr>
+                <th></th>
+                <th colspan="1">Adjustments</th>
+                <th colspan="1">Value</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr chart-value type="indigenous"
+                caption="Indigenous (A<sub>Ind</sub>)"
+                value="encounter.nwauCalculation.A_IND | percentage">
+            </tr>
+            </tbody>
+            <tbody ng-if="encounter.classification ==='Acute Admitted' ||
+                          encounter.classification=='SNAP'">
+            <tr chart-value type="remoteness"
+                caption="Remoteness (A<sub>A</sub>)"
+                value="encounter.nwauCalculation.A_A | percentage">
+            </tr>
+
+            <tr ng-if="encounter.classification === 'SNAP' && journey.nwauVersion < 2015 || encounter.classification === 'Acute Admitted' || (encounter.ansnap.episodeType=='Rehabilitation' || encounter.ansnap.episodeType=='Maintenance') && (encounter.ansnap.healthType=='Mental Health')" chart-value type="paediatric"
+                caption="Paediatric (A<sub>Paed</sub>)"
+                value="encounter.nwauCalculation.A_PAED | percentage">
+            </tr>
+            <tr chart-value type="private-accommodation"
+                caption="Private Patient Accommodation (A<sub>Acc</sub>)"
+                value="encounter.nwauCalculation.A_ACC | numberWholeZero:4">
+            </tr>
+            <tr chart-value type="private-service"
+                caption="Private Patient Service (A<sub>PPS</sub>)"
+                value="encounter.nwauCalculation.A_PPS | percentage">
+            </tr>
+            </tbody>
+            <tbody ng-if="encounter.classification === 'Acute Admitted'">
+            <tr chart-value type="specialist-psych-age"
+                caption="Specialist Psychiatric Age (A<sub>SPA</sub>)"
+                value="encounter.nwauCalculation.A_SPA | percentage">
+            </tr>
+            </tbody>
+            <tbody ng-if="encounter.classification === 'Acute Admitted' && journey.nwauVersion >= 2014">
+            <tr chart-value type="radiotherapy"
+                caption="Radiotherapy (A<sub>RT</sub>)"
+                value="encounter.nwauCalculation.A_RT | percentage">
+            </tr>
+            </tbody>
+
+            <tbody ng-if="encounter.classification === 'Acute Admitted' && encounter.drg.id!=='L61Z' && encounter.drg.id!=='L68Z'&& journey.nwauVersion > 2014">
+            <tr chart-value type="dialysis"
+                caption="Dialysis (A<sub>Dia</sub>)"
+                value="encounter.nwauCalculation.A_DIA | percentage">
+            </tr>
+            </tbody>
+
+            <tbody ng-if="encounter.classification === 'Non Admitted' && journey.nwauVersion > 2014">
+            <tr chart-value type="multidisciplinaryteams"
+                caption="Multidisciplinary Clinic (A<sub>NMC</sub>)"
+                value="encounter.nwauCalculation.A_NMC | percentage">
+            </tr>
+            </tbody>
+
+            <tbody ng-if="encounter.classification === 'Acute Admitted'">
+            <tr chart-value type="intensive-care-unit"
+                caption="Intensive Care Unit (A<sub>ICU</sub>)"
+                value="encounter.icuHours > 0 ? encounter.nwauCalculation.A_ICU : 0 | numberWholeZero:4">
+            </tr>
+            </tbody>
+
+            <!--Mark-->
+            <tbody ng-if="journey.nwauVersion > 2015 && encounter.classification === 'Emergency Department UDG'">
+            <tr chart-value type="emergency-care-age"
+                caption="Emergency Care Age (A<sub>ECA</sub>)"
+                value="encounter.nwauCalculation.A_ECA | percentage">
+            </tr>
+            </tbody>
+            <tbody ng-if="journey.nwauVersion > 2015 && encounter.classification === 'Emergency Department URG'">
+            <tr chart-value type="emergency-care-age"
+                caption="Emergency Care Age (A<sub>ECA</sub>)"
+                value="encounter.nwauCalculation.A_ECA | percentage">
+            </tr>
+            </tbody>
+
+        </table>
+    </div>
+</div>

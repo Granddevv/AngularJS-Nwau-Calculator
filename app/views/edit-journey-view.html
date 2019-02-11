@@ -1,0 +1,25 @@
+<nav-bar>
+    <button ng-click="cancel()"
+            type="button"
+            class="btn btn-default navbar-btn pull-left">
+        Cancel
+    </button>
+
+    <button ng-click="save()"
+            ng-disabled="forms.journeyForm.$invalid"
+            type="button"
+            class="btn btn-primary navbar-btn pull-right">
+        Done
+    </button>
+
+    <button ng-click="delete()"
+            type="button"
+            class="btn btn-danger navbar-btn pull-right">
+        Delete
+    </button>
+
+    <nav-bar-title text="journey.name || 'New Journey'"></nav-bar-title>
+
+</nav-bar>
+
+<journey-form class="col-md-offset-2 col-md-8 edit-journey-content"></journey-form>

@@ -1,0 +1,40 @@
+ "Notes":[ 
+{
+"NonationalalosrecordedagainstZ60A,Z60B": ""}, 
+{
+"NonationalalosrecordedagainstZ60A,Z60B": "DRGs Z60A and Z60B missing Acute price weight information"}, 
+{
+"NonationalalosrecordedagainstZ60A,Z60B": "SEP and NAP NSW price weights obtained from NSW draft weights v1.22"}, 
+{
+"NonationalalosrecordedagainstZ60A,Z60B": "NSW weights used for NAP classifications 20.06,40.02, 40.08, 40.27, 40.33.  30-series weights and 40.34 have a price weight of 0"}, 
+{
+"NonationalalosrecordedagainstZ60A,Z60B": "Does not appear to be unsnapped SA classifications in 2016-17"}, 
+{
+"NonationalalosrecordedagainstZ60A,Z60B": "Is the mapping of MDC to DRG based on DRG letter the same in version 8.0 as last year?"}, 
+{
+"NonationalalosrecordedagainstZ60A,Z60B": "Is the mapping of post codes to region changed from last year?"}, 
+{
+"NonationalalosrecordedagainstZ60A,Z60B": "Several tables to be updated for 201617 yet: facilities tab, regions tab, suggestions tab, state los tab, ICU state tab, los ungrouped state tab"}, 
+{
+"NonationalalosrecordedagainstZ60A,Z60B": ""}, 
+{
+"NonationalalosrecordedagainstZ60A,Z60B": ""}, 
+{
+"NonationalalosrecordedagainstZ60A,Z60B": "Version notes"}, 
+{
+"NonationalalosrecordedagainstZ60A,Z60B": "Includes tabs for 201617.  Several tables to be updated for 201617 yet: facilities tab, regions tab, suggestions tab, state los tab, ICU state tab, los ungrouped state tab"}, 
+{
+"NonationalalosrecordedagainstZ60A,Z60B": "2014 15 tabs are removed. Ungrouped classifications are removed from 201617 SNAP tab"}, 
+{
+"NonationalalosrecordedagainstZ60A,Z60B": "Regions 1617 has been updated. Hosps 1617 has been updated but requires confirmation. Ungrouped paed have been added to the SNAP 1617 tab,  The NSW weights for NAP1617 and SEP 1617 have been updated"}, 
+{
+"NonationalalosrecordedagainstZ60A,Z60B": "Macro for conversion to json files fixed.  Hospital list updated for 1617 and confirmed, and 2016 peer groups referenced.  SNAP adjustement1617changed to refer to NWAU14 adjustment for paediatric ungrouped.  All columns in acute 1617 set to 0 for Z60A and Z60B (thes classifications are no longer possible in DRG8.0).  SNAP1617 updated to include the ungrouped paediatric NMH weights from NWAU16; also the ungrouped MH weights are set to be paediatric only.  There are no non paed ungrouped in 1617. Results for statistics tabs in 1617have been removed"}, 
+{
+"NonationalalosrecordedagainstZ60A,Z60B": "Updated facility names to align with published 1415, 1516 calcualtor.  Changed the name of Bega hospital (N202) to South East Regional Hospital.  Added the URG Grouping tabs"}, 
+{
+"NonationalalosrecordedagainstZ60A,Z60B": "Corrected data in excel to be output as boolean, replaced long hyphens  "–" with standard hyphens "-", changed the NAP1617 data to have the tier 2 codes as strings so trailing zeros aren't truncated (ex. 10.20 vs 10.2),corrected the indigenous and radiotherapy adjustments in SubacuteAdjustment1617"}, 
+{
+"NonationalalosrecordedagainstZ60A,Z60B": "Ungrouped MH classifications are allowed for all ages"}, 
+{
+"NonationalalosrecordedagainstZ60A,Z60B": "Added two new facilities (Byron District Hospital,Mullumbimby & District War Memorial Hospital), suggestions, LOSstate, ICUState and LOSUngroupState tabs added.  The LOSState files also have a new LOS category, 'D' which indicates same day. This is a new functionality in the NWAU calcualtor for 1617"}
+]}

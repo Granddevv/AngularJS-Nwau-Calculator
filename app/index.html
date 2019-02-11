@@ -1,0 +1,131 @@
+<!doctype html>
+<!--[if lt IE 7]>
+<html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>
+<html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>
+<html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" manifest="offline.appcache"> <!--<![endif]-->
+<!---->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>NWAU Calculator | ABF Taskforce</title>
+    <meta name="description" content="">
+    <meta name="format-detection" content="telephone=no"/>
+    <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
+    <meta name="viewport"
+          content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, target-densitydpi=device-dpi"/>
+    <style type="text/css">
+        .splash {
+            display: block;
+            z-index: 10000;
+            opacity: 1;
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            max-height: 100%;
+            width: 100%;
+            max-width: 100%;
+            background-color: #fff;
+            background-repeat: no-repeat;
+            text-align: center;
+
+            -webkit-transition: all 1s linear;
+            -moz-transition: all 1s linear;
+            -ms-transition: all 1s linear;
+            -o-transition: all 1s linear;
+            transition: all 1s linear;
+        }
+
+        .splash img {
+            height: auto;
+            max-height: 100%;
+            width: auto;
+            max-width: 100%;
+        }
+    </style>
+
+    <!-- Prevent the site being displayed when printed -->
+    <style type="text/css" media="print">
+        body { display: none; }
+    </style>
+
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <!-- build:css styles/vendor.css -->
+    <link rel="stylesheet" type="text/css" href="vendor/styles/jquery-ui.css">
+    <link rel="stylesheet" href="vendor/styles/jquery.ui.labeledslider.min.css">
+    <!-- endbuild -->
+    <!-- build:css({.tmp,app}) styles/main.css -->
+    <link rel="stylesheet" href="styles/main.css">
+    <!-- endbuild -->
+</head>
+<body ng-app="nwauCalculatorApp">
+<!--The splash screen must be first-->
+<div class="splash" ng-cloak>
+    <img src="images/vitruvian-man-white.jpg">
+</div>
+
+<!--[if lt IE 9]>
+<p class="browsehappy">The NWAU Calculator requires either IE9+ or the latest version of Chrome, Firefox or Safari.<br>
+    If you are using IE9+ and are seeing this message, try <a href="http://windows.microsoft.com/en-AU/internet-explorer/use-compatibility-view#ie=ie-9">turning <strong>OFF</strong> compatibility view</a>.<br>
+    If you are using an outdated browser, please <a href="http://browsehappy.com/">upgrade
+    your browser</a> to improve your experience.</p>
+<![endif]-->
+
+<!-- Add your site or application content here -->
+<div ui-view id="main-view"></div>
+
+<!--[if lt IE 9]>
+<script src="bower_components/es5-shim/es5-shim.min.js"></script>
+<script src="bower_components/respond/dest/respond.min.js"></script>
+<script src="bower_components/json3/lib/json3.min.js"></script>
+<![endif]-->
+
+<!-- build:js scripts/vendor.js -->
+<!-- bower:js -->
+<script src="bower_components/jquery/jquery.js"></script>
+<script src="bower_components/es5-shim/es5-shim.js"></script>
+<script src="bower_components/angular/angular.js"></script>
+<script src="bower_components/angular-animate/angular-animate.js"></script>
+<script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+<script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+<script src="bower_components/angular-touch/angular-touch.js"></script>
+<script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+<script src="bower_components/angular-cache/dist/angular-cache.min.js"></script>
+<script src="bower_components/sass-bootstrap/dist/js/bootstrap.js"></script>
+<script src="bower_components/lodash/dist/lodash.compat.js"></script>
+<script src="bower_components/d3/d3.js"></script>
+<script src="bower_components/jquery-ui/ui/jquery-ui.js"></script>
+<script src="bower_components/jquery-mousewheel/jquery.mousewheel.js"></script>
+<script src="bower_components/fastclick/lib/fastclick.js"></script>
+<!-- endbower -->
+<script src="vendor/scripts/jquery.ui.labeledslider.js"></script>
+<script src="vendor/scripts/jquery.ui.touch-punch.js"></script>
+<!-- endbuild -->
+
+
+
+<!-- build:js({.tmp,app}) scripts/scripts.js -->
+<script src="/concat/scripts/scripts.js"></script>
+<!-- <script src="scripts/modules/core/app.js"></script>
+<script src="scripts/modules/core/**/*.js"></script>
+<script src="scripts/services/ihpa-service.js"></script>
+<script src="scripts/services/calculator-service.js"></script>
+<script src="scripts/services/encounter-service.js"></script>
+<script src="scripts/services/journey-service.js"></script>
+<script src="scripts/controllers/journey-controller.js"></script>
+<script src="scripts/controllers/start-controller.js"></script>
+<script src="scripts/controllers/encounter-controller.js"></script>
+<script src="scripts/controllers/compare-controller.js"></script>
+<script src="scripts/controllers/waterfall-controller.js"></script>
+<script src="scripts/controllers/edit-journey-controller.js"></script>
+<script src="scripts/controllers/delete-controller.js"></script>
+<script src="scripts/controllers/group-selector-controller.js"></script>
+<script src="scripts/directives.js"></script>
+<script src="scripts/filters.js"></script> -->
+<!-- endbuild -->
+</body>
+</html>

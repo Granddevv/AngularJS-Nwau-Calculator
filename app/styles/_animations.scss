@@ -1,0 +1,53 @@
+.black-out {
+  background-color: #000000;
+  opacity: 0.5;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  z-index: 10;
+
+  -webkit-transition: 0.3s linear all;
+  -moz-transition:    0.3s linear all;
+  -o-transition:      0.3s linear all;
+  transition:         0.3s linear all;
+}
+
+.black-out.ng-hide-add,
+.black-out.ng-hide-remove {
+  display:block!important;
+}
+
+.black-out.ng-hide {
+  opacity:0;
+}
+
+
+
+[ui-view].ng-enter, [ui-view].ng-leave{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-transition: all .25s ease-in-out;
+  -moz-transition:    all .25s ease-in-out;
+  -o-transition:      all .25s ease-in-out;
+  transition:         all .25s ease-in-out;
+}
+
+[ui-view].ng-enter {
+  transition-delay: 0.25s;
+}
+
+[ui-view].ng-leave{
+  opacity: 1;
+}
+[ui-view].ng-leave-active{
+  opacity: -1;
+}
+
+[ui-view].ng-enter{
+  opacity: 0;
+}
+
+[ui-view].ng-enter-active{
+  opacity: 1;
+}

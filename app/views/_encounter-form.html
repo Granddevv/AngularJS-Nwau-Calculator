@@ -1,0 +1,365 @@
+<div class="panel panel-default encounter-form">
+<div class="panel-body">
+<form name="forms.encounterForm" role="form">
+<div ng-class="{ 'has-error': forms.encounterForm.classification.$invalid && !forms.encounterForm.classification.$pristine }"
+     class="form-group col-md-6">
+    <label for="classification" class="control-label">Patient Type</label>
+    <help-btn placement="left"
+              help="The patient type represents the national casemix classifications currently in use for Activity Based Funding. The first encounter in a journey will limit your choices in subsequent encounters. Choices will be limited according to classification and counting rules."></help-btn>
+    <div class="inline-input">
+        <select id="classification"
+                name="classification"
+                ng-model="encounter.classification"
+                required
+                ng-required="true"
+                ng-pattern="/.*/"
+                ng-change="change()"
+                class="dropdown">
+            <option value='Acute Admitted' ng-if="!acuteWasLast && journey.facility.FacilityID !=='SASF'">Acute Admitted</option>
+            <option value='SNAP' ng-if="journey.facility.FacilityID !=='SASF'">Sub Acute and Non Acute Patient Care</option>
+            <option value='Emergency Department UDG' ng-if="EDClass === 'UDG' && !EDWasLast && journey.facility.FacilityID !=='SASF'">
+                Emergency Department
+            </option>
+            <option value='Emergency Department URG' ng-if="EDClass === 'URG' && !EDWasLast && journey.facility.FacilityID !=='SASF'">
+                Emergency Department
+            </option>
+            <option value='Non Admitted'>Non Admitted</option>
+        </select>
+    </div>
+</div>
+
+<div ng-class="{ 'has-error': forms.encounterForm.drg.$invalid && !forms.encounterForm.drg.$pristine }"
+     ng-if="encounter.classification === 'Acute Admitted'"
+     class="form-group col-md-6">
+    <label for="drg" class="control-label">Classification: Diagnosis Related Group (DRG)</label>
+    <help-btn placement="left"
+              help="Acute admitted classification elements available for selection. If the DRG you wish to use is known, it may be entered directly into the classification field. If it is not known to you, click the search icon. Using the search icon you can narrow your choices by selecting the MDC and DRG. Following the steps will assist you in determining the most suitable classification."></help-btn>
+    <button ng-click="groupSelector('drg')"
+            type="button" class="btn btn-default pull-right">
+        <i class="glyphicon glyphicon-search"></i>
+    </button>
+    <div class="inline-input">
+        <input ng-model="encounter.drg"
+               ng-change="change()"
+               ng-required="!encounter.classification || encounter.classification === 'Acute Admitted'"
+               required
+               typeahead="class as class.name for class in classes | filter:{name:$viewValue} | limitTo:20"
+               typeahead-editable="false"
+               typeahead-on-select="change()"
+               id="drg"
+               name="drg"
+               type="search"
+               class="form-control"
+               placeholder="The DRG for this encounter">
+    </div>
+</div>
+
+<div ng-class="{ 'has-error': forms.encounterForm.ansnap.$invalid && !forms.encounterForm.ansnap.$pristine }"
+     ng-if="encounter.classification === 'SNAP' && journey.nwauVersion <= 2014"
+     class="form-group col-md-6">
+    <label for="ansnap" class="control-label">Classification: Australian National Subacute and Non Acute Patient
+        (AN-SNAP) Class</label>
+    <help-btn placement="left"
+              help="Sub and Non-Acute admitted patient classification elements available for selection. If the AN-SNAP class is known, it may be entered directly into the classification field. If it is not known to you, click the search icon. Using the search icon you can narrow your choices by selecting the care type and grouping. Following the steps will assist you in determining the most suitable classification."></help-btn>
+    <button ng-click="groupSelector('ansnap')"
+            type="button" class="btn btn-default pull-right">
+        <i class="glyphicon glyphicon-search"></i>
+    </button>
+    <div class="inline-input">
+        <input ng-model="encounter.ansnap"
+               ng-required="!encounter.classification || encounter.classification === 'SNAP'"
+               ng-change="change()"
+               typeahead="class as class.name for class in classes | filter:{name:$viewValue} | limitTo:20"
+               typeahead-editable="false"
+               typeahead-on-select="change()"
+               id="ansnap"
+               name="ansnap"
+               type="search"
+               class="form-control"
+               placeholder="The AN-SNAP Class for this encounter">
+    </div>
+</div>
+
+
+<div ng-class="{ 'has-error': forms.encounterForm.ansnap.$invalid && !forms.encounterForm.ansnap.$pristine }"
+     ng-if="encounter.classification === 'SNAP' && journey.nwauVersion > 2014"
+     class="form-group col-md-6">
+    <label for="ansnap" class="control-label"><u>Classification:</u> <br/> <strong>Non-Mental Health:</strong> Australian National Subacute and Non Acute Patient (AN-SNAP) Class. <br/> Mental Health: Care Type
+        </label>
+    <help-btn placement="left"
+              help="Sub and Non-Acute admitted patient classification elements available for selection. If the AN-SNAP class is known, it may be entered directly into the classification field. If it is not known to you, click the search icon. Using the search icon you can narrow your choices by selecting the care type and then either 'Mental Health' or 'Non-Mental Health'. Mental Health should only be selected if the encounter will occur in a designated Mental Health Unit. Following the steps will assist you in determining the most suitable classification."></help-btn>
+    <button ng-click="groupSelector('ansnap')"
+            type="button" class="btn btn-default pull-right">
+        <i class="glyphicon glyphicon-search"></i>
+    </button>
+    <div class="inline-input">
+        <input ng-model="encounter.ansnap"
+               ng-required="!encounter.classification || encounter.classification === 'SNAP'"
+               ng-change="change()"
+               typeahead="class as class.name for class in classes | filter:{name:$viewValue} | limitTo:20"
+               typeahead-editable="false"
+               typeahead-on-select="change()"
+               id="ansnap"
+               name="ansnap"
+               type="search"
+               class="form-control"
+               placeholder="The AN-SNAP Class for this encounter">
+    </div>
+</div>
+
+
+<div ng-class="{ 'has-error': forms.encounterForm.edudg.$invalid && !forms.encounterForm.edudg.$pristine }"
+     ng-if="encounter.classification === 'Emergency Department UDG'" class="form-group col-md-6">
+    <label for="edudg" class="control-label">Classification: Urgency Disposition Group (UDG)</label>
+    <help-btn placement="left"
+              help="Urgency Disposition  Groups are Emergency Department classification elements applicable to facilities with level 1-3A emergency departments. The UDG class may be entered directly into the classification field."></help-btn>
+    <div class="inline-input">
+        <input ng-model="encounter.edudg"
+               ng-required="!encounter.classification || encounter.classification === 'Emergency Department UDG'"
+               ng-change="change()"
+               typeahead="class as class.name for class in classes | filter:{name:$viewValue} | limitTo:20"
+               typeahead-editable="false"
+               typeahead-on-select="change()"
+               id="edudg"
+               name="edudg"
+               type="search"
+               class="form-control"
+               placeholder="The UDG for this encounter">
+    </div>
+</div>
+
+
+<div ng-class="{ 'has-error': forms.encounterForm.edurg.$invalid && !forms.encounterForm.edurg.$pristine }"
+     ng-if="encounter.classification === 'Emergency Department URG'" class="form-group col-md-6">
+    <label for="edurg" class="control-label">Classification: Urgency Related Group (URG)</label>
+    <help-btn placement="left"
+              help="Urgency Related Groups are Emergency Department classification elements applicable to facilities with level 3B-6 emergency departments. If the URG class you wish to use is known, it may be entered directly into the classification field. If it is not known to you, click the search icon. Using the search icon you can narrow your choices by selecting the Type of Visit, Episode End Status, Triage Level and Major Diagnostic Block. Following the steps will assist you in determining the most suitable classification."></help-btn>
+    <button ng-click="groupSelector('edurg')"
+            type="button" class="btn btn-default pull-right">
+        <i class="glyphicon glyphicon-search"></i>
+    </button>
+    <div class="inline-input">
+        <input ng-model="encounter.edurg"
+               ng-required="!encounter.classification || encounter.classification === 'Emergency Department URG'"
+               ng-change="change()"
+               typeahead="class as class.name for class in classes | filter:{name:$viewValue} | limitTo:20"
+               typeahead-editable="false"
+               typeahead-on-select="change()"
+               id="edurg"
+               name="edurg"
+               type="search"
+               class="form-control"
+               placeholder="The URG for this encounter">
+    </div>
+</div>
+
+<div ng-class="{ 'has-error': forms.encounterForm.tier2clinic.$invalid && !forms.encounterForm.tier2clinic.$pristine }"
+     ng-if="encounter.classification === 'Non Admitted'"
+     class="form-group col-md-6">
+    <label for="tier2clinic" class="control-label">Classification: Tier 2 Clinic</label>
+    <help-btn placement="left"
+              help="Enter a Tier 2 Clinic classification. Non-Admitted patient activity is classfied using the national Tier 2 classification."></help-btn>
+    <div class="inline-input">
+        <input ng-model="encounter.tier2clinic"
+               ng-required="!encounter.classification || encounter.classification === 'Non Admitted'"
+               typeahead="class as class.name for class in classes | filter:{name:$viewValue} | limitTo:20"
+               typeahead-editable="false"
+               typeahead-on-select="change()"
+               ng-change="change()"
+               name="tier2clinic"
+               id="tier2clinic"
+               type="search"
+               class="form-control"
+               placeholder="The Tier 2 Clinic for this encounter">
+    </div>
+</div>
+
+<div ng-class="{ 'has-error': forms.encounterForm.lengthOfStay.$invalid && !forms.encounterForm.lengthOfStay.$pristine }"
+     ng-if="(encounter.classification === 'Acute Admitted' && encounter.drg) ||
+            (encounter.classification=== 'SNAP' && encounter.ansnap)"
+     class="form-group col-md-6">
+    <label for="lengthOfStay" class="control-label">Length of Stay
+
+      <span ng-if="dayLimitDrg || showLosMsg"> must be less than {{numDays}} days</span>
+    </label>
+    <help-btn placement="left"
+              help="Enter the Length of Stay. The length of stay for all admitted activity may have an impact on the NWAU calculated. The length of Stay does not impact the NWAU in the Emergency Department (ED) or Non-Admitted (NA)"></help-btn>
+    <input required ng-model="encounter.lengthOfStay"
+           ng-change="change()"
+           id="lengthOfStay"
+           name="lengthOfStay"
+           ng-pattern="/[0-9]+/"
+           type="number"
+           min="1"
+           class="form-control pull-left">
+
+    <div class="inline-input">
+        <div slider
+             min="1"
+             max="losMax"
+             ng-model="encounter.lengthOfStay"
+             value="encounter.lengthOfStay"
+             labels="losLabels"
+             change="change()"
+             id="los-slider"
+             class="pull-right">
+        </div>
+    </div>
+</div>
+
+<div ng-class="{ 'has-error': forms.encounterForm.serviceEvents.$invalid && !forms.encounterForm.serviceEvents.$pristine }"
+     ng-if="(encounter.classification === 'Non Admitted' && encounter.tier2clinic)"
+     class="form-group col-md-6">
+    <label for="service-events" class="control-label">Number of Service Events</label>
+    <help-btn placement="left"
+              help="Enter the number of service events expected over the course of treatment. The total NWAU calculated for this encounter will be derived by multiplying the Tier 2 class NWAU by the number of service events."></help-btn>
+    <input ng-model="encounter.serviceEvents"
+           ng-change="change()"
+           id="service-events"
+           name="service-events"
+           ng-required="encounter.classification ==='Non Admitted'"
+           ng-pattern="/[0-9]+/"
+           type="number"
+           min="1"
+           class="form-control pull-left">
+
+    <div class="inline-input">
+        <div slider
+             min="1"
+             max="100"
+             value="encounter.serviceEvents"
+             labels="serviceEventsLabels"
+             change="change()"
+             id="service-events-slider"
+             class="pull-right">
+        </div>
+    </div>
+
+</div>
+
+<div class="col-xs-12 encounter-form-button-group">
+    <div class="col-sm-6">
+        <div ng-if="encounter.tier2clinic.monthlyRollup" class="alert alert-info text-center inline-input">
+            Funding for this Tier 2 classification is only provided once each month per patient, regardless of the number of service events.
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div ng-if="encounter.classification === 'Non Admitted' && journey.nwauVersion > 2014">
+            <label class="control-label">Non-Admitted Multidisciplinary Clinic</label>
+            <switch-control model="encounter.nmc" ng-required="encounter.classification === 'Non Admitted'" change="change()" true-label="Yes" false-label="No">
+            </switch-control>
+            <help-btn placement="top" help="Select multi-disciplinary clinic if three or more health care providers (each of a different specialty) are present during the encounter" float-normal="true"></help-btn>
+        </div>
+    </div>
+</div>
+
+<div ng-if="encounter.classification === 'Acute Admitted' && encounter.drg"
+     ng-class="{ 'has-error': forms.encounterForm.icuHours.$invalid && !forms.encounterForm.icuHours.$pristine }"
+     class="form-group col-md-6">
+    <label for="icuHours" class="control-label">
+        ICU Hours
+        <span ng-if="forms.encounterForm.icuHours.$invalid && !forms.encounterForm.icuHours.$pristine || encounter.icuHours > encounter.lengthOfStay * 24">must be less than or equal to 'Length of Stay' x 24 hours </span>
+    </label>
+    <help-btn placement="left"
+              help="Enter the hours spent in the Intensive Care Unit (ICU). ICU hours will have an impact NWAU only in facilities with ICUs eligible for the ICU adjustment."></help-btn>
+    <div ng-if="icuEligibility && !encounter.drg.bundledIcu">
+        <input ng-model="encounter.icuHours"
+               ng-change="change()"
+               ng-required="encounter.classification === 'Acute Admitted'"
+               required
+               ng-pattern="/[0-9]+/"
+               id="icuHours"
+               name="icuHours"
+               type="number"
+               min="0"
+               class="form-control pull-left">
+
+        <div class="inline-input">
+            <div slider
+                 min="0"
+                 max="100"
+                 value="encounter.icuHours"
+                 labels="icuLabels"
+                 change="change()"
+                 id="icu-slider"
+                 class="pull-right">
+            </div>
+        </div>
+    </div>
+    <div ng-if="!icuEligibility"
+         class="alert alert-info text-center inline-input">
+        This facility is not eligible for an ICU adjustment.
+    </div>
+    <div ng-if="icuEligibility && encounter.drg.bundledIcu"
+         class="alert alert-info text-center inline-input">
+        This DRG already has ICU funding bundled.
+    </div>
+</div>
+<div class="col-xs-12 encounter-form-button-group">
+    <div class="col-sm-3">
+        <div ng-if="((encounter.classification === 'Acute Admitted' && encounter.drg && encounter.drg.sameDay > 0) || (encounter.classification === 'SNAP' && encounter.ansnap && encounter.ansnap.sameDay > 0)) && encounter.lengthOfStay === 1">
+            <label class="control-label">Same Day?</label>
+            <switch-control model="encounter.sameDay"
+                            ng-required="(encounter.classification === 'Acute Admitted' && encounter.lengthOfStay === 1) || encounter.classification === 'SNAP'"
+                            change="change()"
+                            true-label="Yes"
+                            false-label="No">
+            </switch-control>
+            <help-btn placement="top"
+                      help="Select &quot;Yes&quot; if the patient was admitted & discharged on the same calendar day. Encounters identified as &quot;Same Day&quot; will impact any accommodation adjustments."
+                      float-normal="true"></help-btn>
+        </div>
+    </div>
+    <div class="col-sm-3">
+        <div ng-if="encounter.classification === 'Acute Admitted' && encounter.drg && encounter.drg.id!=='L61Z' && encounter.drg.id!=='L68Z' && journey.nwauVersion > 2014">
+            <label class="control-label">Dialysis?</label>
+            <switch-control model="encounter.dialysis"
+                            ng-required="encounter.classification === 'Acute Admitted'"
+                            change="change()"
+                            true-label="Yes"
+                            false-label="No">
+            </switch-control>
+            <help-btn placement="top"
+                      help="Select &quot;Yes&quot; if the patient has a record of one or more eligible Dialysis procedures in their medical history."
+                      float-normal="true"></help-btn>
+        </div>
+    </div>
+    <div class="col-sm-3">
+        <div ng-if="encounter.classification === 'Acute Admitted' && encounter.drg && journey.nwauVersion >= 2014">
+            <label class="control-label">Radiotherapy?</label>
+            <switch-control model="encounter.radiotherapy"
+                            ng-required="encounter.classification === 'Acute Admitted'"
+                            change="change()"
+                            true-label="Yes"
+                            false-label="No">
+            </switch-control>
+            <help-btn placement="top"
+                      help="Select &quot;Yes&quot; if the patient has a record of one or more eligible Radiotherapy procedures in their medical history."
+                      float-normal="true"></help-btn>
+        </div>
+    </div>
+    <div class="col-sm-3">
+        <div ng-if="encounter.classification === 'Acute Admitted' && encounter.drg">
+            <label class="control-label">Psychiatric Days Recorded?</label>
+            <switch-control model="encounter.psychiatric"
+                            ng-required="encounter.classification === 'Acute Admitted'"
+                            change="change()"
+                            true-label="Yes"
+                            false-label="No">
+            </switch-control>
+            <help-btn placement="top"
+                      help="Select &quot;Yes&quot; if the patient has spent any time in a designated psychiatric care unit"
+                      float-normal="true"></help-btn>
+        </div>
+    </div>
+</div>
+<div class="col-xs-12">
+    <button ng-click="done()"
+            ng-disabled="forms.journeyForm.$invalid || forms.encounterForm.$invalid || encounter.icuHours > encounter.lengthOfStay * 24 || showLosMsg"
+            class="btn btn-primary navbar-btn pull-right">
+        Done
+    </button>
+</div>
+</form>
+</div>
+</div>

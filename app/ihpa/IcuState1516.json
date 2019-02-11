@@ -1,0 +1,42 @@
+{ "IcuState":[ 
+{
+"year": "2015",
+"class_name": "801A",
+"icu_hours": 12522,
+"icu_episodes": 126,
+"tot_episodes": 516,
+"warn_lt5_ICU_encounters": "No",
+"avg": 82.69}, 
+{
+"year": "2015",
+"class_name": "801B",
+"icu_hours": 12522,
+"icu_episodes": 126,
+"tot_episodes": 516,
+"warn_lt5_ICU_encounters": "No",
+"avg": 82.69}, 
+{
+"year": "2015",
+"class_name": "801C",
+"icu_hours": 12522,
+"icu_episodes": 126,
+"tot_episodes": 516,
+"warn_lt5_ICU_encounters": "No",
+"avg": 82.69}, 
+{
+"year": "2015",
+"class_name": "A01Z",
+"icu_hours": 12522,
+"icu_episodes": 126,
+"tot_episodes": 516,
+"warn_lt5_ICU_encounters": "No",
+"avg": 82.69}, 
+{
+"year": "2015",
+"class_name": "Z66Z",
+"icu_hours": 0,
+"icu_episodes": 0,
+"tot_episodes": 83,
+"warn_lt5_ICU_encounters": "Nil",
+"avg": ""}
+]}

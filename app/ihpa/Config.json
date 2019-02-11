@@ -1,0 +1,41 @@
+{ "Config":[ 
+{
+"Peer": "1",
+"PeerGroup": "Principal Referral"}, 
+{
+"Peer": "2",
+"PeerGroup": "Major Facility"}, 
+{
+"Peer": "3",
+"PeerGroup": "District Group 1"}, 
+{
+"Peer": "4",
+"PeerGroup": "District Group 2"}, 
+{
+"Peer": "5a",
+"PeerGroup": "Paediatric Specialist Hospital"}, 
+{
+"Peer": "5b",
+"PeerGroup": "Palliative Care Hospital"}, 
+{
+"Peer": "5c",
+"PeerGroup": "Rehabilitation Hospital"}, 
+{
+"Peer": "5d",
+"PeerGroup": "Sub-Acute Hospital"}, 
+{
+"Peer": "6a",
+"PeerGroup": "Community Non-Acute Hospital"}, 
+{
+"Peer": "6b",
+"PeerGroup": "Community Acute - non-surgery"}, 
+{
+"Peer": "6c",
+"PeerGroup": "Community Acute - surgery"}, 
+{
+"Peer": "7",
+"PeerGroup": "Nursing Home"}, 
+{
+"Peer": "8",
+"PeerGroup": "Ungrouped Acute - tertiary referral hospital"}
+]}

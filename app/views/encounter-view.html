@@ -1,0 +1,119 @@
+<slide-out menu-visible="view.showJourneyForm">
+    <nav-bar>
+        <button type="button"
+                ng-model="view.showJourneyForm"
+                btn-checkbox
+                class="btn btn-default navbar-btn pull-left"
+                btn-checkbox-true="true"
+                btn-checkbox-false="false">
+            Journey Details
+        </button>
+
+        <button ng-click="done()"
+                ng-disabled="forms.journeyForm.$invalid || forms.encounterForm.$invalid || encounter.icuHours > encounter.lengthOfStay * 24 || showLosMsg"
+                class="btn btn-primary navbar-btn pull-right">
+            Done
+        </button>
+        <button ng-click="delete()"
+                class="btn btn-danger navbar-btn pull-right">
+            Delete
+        </button>
+
+        <nav-bar-title text="currentCare.name || 'New Encounter'"></nav-bar-title>
+    </nav-bar>
+
+    <slide-out-menu>
+        <journey-form class="journey-form"></journey-form>
+    </slide-out-menu>
+    <slide-out-container black-out="false" id="encounter-page" class="pull-right page-margin">
+        <div ng-if="journey.private && encounter.classification === 'Non Admitted'" class="alert alert-danger col-xs-12 warning-margin text-center">
+            You have selected a private patient for this journey. Private health insurance can not be used for non-admitted encounters in NSW public hospitals, For the purposes of NWAU calculation this encounter will be considered public. Privately referred non-admitted encounters will attract an NWAU of zero but will be eligible for Commonwealth MBS Payment.
+        </div>
+        <div ng-if="journey.private && encounter.classification === 'Emergency Department URG'" class="alert alert-danger col-xs-12 warning-margin text-center">
+            You have selected a private patient for this journey. Private health insurance cannot be used for emergency department visits, therefore this episode will attract the equivalent public NWAU.
+        </div>
+        <div ng-if="journey.private && (encounter.classification === 'Acute Admitted' || encounter.classification === 'SNAP')" class="alert alert-info col-xs-12 warning-margin text-center">
+            Additional Revenue will be available from the patient's third party payers and will help meet your revenue target.
+        </div>
+        <div ng-if="journey.nwauVersion > 2014 && journey.age <=17 && encounter.lengthOfStay > 0 && encounter.classification === 'SNAP' && !(encounter.ansnap.id === 'Paed-001' || encounter.ansnap.id === 'Paed-002' || encounter.ansnap.id === 'Paed-003' || encounter.ansnap.id === 'Maintenance' || encounter.ansnap.id === 'Rehabilitation')" class="alert alert-danger col-xs-12 warning-margin text-center">
+            You have selected a non-paediatric class for a patient who is 17 or under, therefore there is no NWAU calculation. Please select a paediatric class.
+        </div>
+        <div ng-if="journey.nwauVersion > 2014 && journey.age > 17 && encounter.lengthOfStay > 0 && encounter.classification === 'SNAP' && (encounter.ansnap.id === 'Paed-001' || encounter.ansnap.id === 'Paed-002' || encounter.ansnap.id === 'Paed-003')" class="alert alert-danger col-xs-12 warning-margin text-center">
+          You have selected a paediatric class for a patient who is older than 17, therefore there is no NWAU calculation. Please select an AN-SNAP class.
+        </div>
+        <div ng-if="(encounter.classification === 'Emergency Department UDG'
+              || encounter.classification === 'Emergency Department URG')
+              && acuteWasLast"
+             class="alert alert-warning col-xs-12 warning-margin text-center">This is an unusual order in the journey.
+            (Acute to ED)
+        </div>
+        <div ng-if="encounter.classification === 'Acute Admitted' && acuteWasLast"
+             class="alert alert-danger col-xs-12 warning-margin text-center">This is an invalid encounter order.
+            (Acute to Acute)
+        </div>
+        <div ng-if="(encounter.classification === 'Emergency Department UDG'
+              || encounter.classification === 'Emergency Department URG')
+              && EDWasLast"
+             class="alert alert-danger col-xs-12 warning-margin text-center">This is an invalid encounter order.
+            (ED to ED)
+        </div>
+        <div ng-if="(encounter.classification === 'Emergency Department UDG'
+              || encounter.classification === 'Emergency Department URG')
+              && EDClass === false"
+             class="alert alert-danger col-xs-12 warning-margin text-center">This is an invalid encounter.
+            (Facility does not handle ED)
+        </div>
+        <div ng-if="encounter.classification === 'Emergency Department UDG'
+              && EDClass === 'URG'"
+             class="alert alert-danger col-xs-12 warning-margin text-center">This is an invalid encounter.
+            (Facility does not handle ED UDG)
+        </div>
+        <div ng-if="encounter.classification === 'Emergency Department URG'
+              && EDClass === 'UDG'"
+             class="alert alert-danger col-xs-12 warning-margin text-center">This is an invalid encounter.
+            (Facility does not handle ED URG)
+        </div>
+        <div ng-if="journey.facility.FacilityID === 'SASF'"
+             class="alert alert-info col-xs-12 warning-margin text-center">
+            Stand-alone service facilities (SASF) are small facilities that supply a limited range of Non-Admitted care. In NWAU 14 the activities from SASFs are considered in scope for payment under ABF.  The SASF you have selected can only be used for Non-Admitted Activity in NWAU 14 and is meant to represent any SASF in NSW.
+        </div>
+        <div ng-show="encounter.nwauCalculation"
+             class="encounter-details">
+            <div ui-view="encounterNwauChart"
+                 ng-show="view.display === 'nwau'"
+                 class="row"></div>
+            <div ui-view="encounterLosChart"
+                 ng-show="view.display === 'los'"
+                 class="row"></div>
+            <div ui-view="encounterEquationPage"
+                 ng-show="view.display === 'formula'"
+                 class="row"></div>
+            <div class="text-center">
+                <div>
+                    <div class="nwau-total">
+                        <label>NWAU{{ journey.nwauVersion % 100 }}</label>
+
+                        <div>{{ (encounter.nwauCalculation.adjustedNwau || encounter.nwauCalculation.nwau) | numberWholeZero: 4 }}</div>
+                    </div>
+                    <div class="nwau-total">
+                        <label>Funding</label>
+
+                        <div>{{ (encounter.nwauCalculation.adjustedPrice || encounter.nwauCalculation.price) | currencyWhole }}</div>
+                    </div>
+                </div>
+                <div class="btn-group">
+                    <button type="button" class="btn btn-primary" ng-model="view.display" btn-radio="'nwau'">NWAU
+                    </button>
+                    <button ng-if="encounter.classification === 'Acute Admitted' || encounter.classification=== 'SNAP'"
+                            type="button" class="btn btn-primary" ng-model="view.display" btn-radio="'los'">Length of
+                        Stay
+                    </button>
+                    <button type="button" class="btn btn-primary" ng-model="view.display" btn-radio="'formula'">
+                        Formula
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div id="encounter-form" ui-view="encounterForm" class="row"></div>
+    </slide-out-container>
+</slide-out>

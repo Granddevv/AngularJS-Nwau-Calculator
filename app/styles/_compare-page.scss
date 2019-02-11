@@ -1,0 +1,101 @@
+.compare-page * .journey-summary-details,
+.compare-page * .journey-summary-chart {
+  display: inline-block;
+}
+
+.compare-page .nwau-value p {
+  font-size: 15px;
+  margin-bottom: 0;
+}
+
+.compare-page * .summary-value {
+  width: 50%;
+}
+
+.compare-page * .summary-full-width {
+  width: 100%;
+}
+
+.compare-page * .panel {
+  margin-bottom: 10px;
+}
+
+.compare-page * .summary-column {
+  width: 49%;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.compare-page * .journey-summary-chart {
+  height: 200px;
+}
+.compare-page * .stacked-bar-chart {
+  height: 200px;
+}
+
+.compare-page * .panel {
+  min-height: 310px;
+}
+
+@media screen and (min-width: 768px) and (min-height: 750px){
+  .compare-page * .journey-summary {
+    position: fixed;
+    z-index: 10;
+    width: calc(50% - 40px);
+    -webkit-box-shadow: -1px 0px 30px 0px rgba(50, 50, 50, 1);
+    -moz-box-shadow:    -1px 0px 30px 0px rgba(50, 50, 50, 1);
+    box-shadow:         -1px 0px 30px 0px rgba(50, 50, 50, 1);
+  }
+}
+
+@media screen and (max-width: 767px), screen and (max-height: 749px) {
+  .compare-page * .journey-summary.panel > .panel-heading {
+    position: fixed;
+    z-index: 1000;
+    border: $panel-primary-border solid 2px;
+    width: calc(50% - 40px);
+    margin: -12px 0 0 -2px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .compare-page * .journey-summary.panel > .panel-body {
+    margin-top: 40px;
+  }
+
+  .compare-page * .journey-summary-chart {
+    height: 200px;
+  }
+
+  .compare-page * .summary-value {
+    width: 100%;
+  }
+
+  .compare-page * .summary-column {
+    width: 100%;
+  }
+
+  .compare-page * .nwau-value {
+    width: 100%;
+  }
+
+  .page-margin.compare-page {
+    margin-left: -15px;
+    margin-right: -15px;
+  }
+  .compare-page * .journey-summary.panel > .panel-heading {
+    position: fixed;
+    z-index: 1000;
+    border: $panel-primary-border solid 2px;
+    width: calc(50% - 15px);
+  }
+
+  .compare-page .col-xs-6.journey-0 {
+    padding-right: 5px;
+  }
+
+  .compare-page .col-xs-6.journey-1 {
+    padding-left: 5px;
+  }
+}
+

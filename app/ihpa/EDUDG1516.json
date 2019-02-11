@@ -1,0 +1,70 @@
+{ "EDUDG":[ 
+{
+"UDG": "1",
+"Description": "Adm_T1",
+"PriceWeights": 0.3234}, 
+{
+"UDG": "2",
+"Description": "Adm_T2",
+"PriceWeights": 0.2355}, 
+{
+"UDG": "3",
+"Description": "Adm_T3",
+"PriceWeights": 0.187}, 
+{
+"UDG": "4",
+"Description": "Adm_T4",
+"PriceWeights": 0.1288}, 
+{
+"UDG": "5",
+"Description": "Adm_T5",
+"PriceWeights": 0.2177}, 
+{
+"UDG": "6",
+"Description": "N-A_T1",
+"PriceWeights": 0.2174}, 
+{
+"UDG": "7",
+"Description": "N-A_T2",
+"PriceWeights": 0.1068}, 
+{
+"UDG": "8",
+"Description": "N-A_T3",
+"PriceWeights": 0.1201}, 
+{
+"UDG": "9",
+"Description": "N-A_T4",
+"PriceWeights": 0.12}, 
+{
+"UDG": "10",
+"Description": "N-A_T5",
+"PriceWeights": 0.024}, 
+{
+"UDG": "11",
+"Description": "Did Not Wait",
+"PriceWeights": 0.032}, 
+{
+"UDG": "12",
+"Description": "Dead on Arrival w any Triage w any MDB",
+"PriceWeights": 0.0626}, 
+{
+"UDG": "13",
+"Description": "Transfer presentation",
+"PriceWeights": 0.2145}, 
+{
+"UDG": "14",
+"Description": "Died in emergency department",
+"PriceWeights": 0.2798}, 
+{
+"UDG": "15",
+"Description": "Adm_Return visit, planned w any Triage",
+"PriceWeights": 0.1416}, 
+{
+"UDG": "16",
+"Description": "N-A Return visit, planned - Triage 1, 2, 3",
+"PriceWeights": 0.12}, 
+{
+"UDG": "17",
+"Description": "N-A Return visit, planned - Triage 4,5",
+"PriceWeights": 0.0686}
+]}

@@ -1,0 +1,32 @@
+{ "NAP":[ 
+{
+"Tier2Clinic": "10.01",
+"Description": "Hyperbaric medicine",
+"PriceWeights": 0.2807,
+"MonthlyRollup": false,
+"State_Weight": false}, 
+{
+"Tier2Clinic": "10.02",
+"Description": "Interventional imaging",
+"PriceWeights": 0.3146,
+"MonthlyRollup": false,
+"State_Weight": false}, 
+{
+"Tier2Clinic": "10.03",
+"Description": "Minor surgical",
+"PriceWeights": 0.0435,
+"MonthlyRollup": false,
+"State_Weight": false}, 
+{
+"Tier2Clinic": "10.04",
+"Description": "Dental",
+"PriceWeights": 0.0447,
+"MonthlyRollup": false,
+"State_Weight": false}, 
+{
+"Tier2Clinic": "10.05",
+"Description": "Angioplasty/angiography",
+"PriceWeights": 0.2343,
+"MonthlyRollup": false,
+"State_Weight": false}, 
+]}

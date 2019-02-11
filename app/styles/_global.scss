@@ -1,0 +1,285 @@
+html,body
+{
+  height: 100%;
+}
+body {
+  padding-top: $body-padding;
+}
+
+a, a:hover {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.panel {
+  border-width: 2px;
+}
+
+.row {
+  white-space: normal;
+}
+
+.container {
+  padding: 0;
+}
+
+.nav-fixed-top {
+  position: fixed;
+  width: 100%;
+}
+
+#main-view {
+  height: 100%;
+}
+
+.form-horizontal .form-group {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.browsehappy {
+  margin: 0.2em 0;
+  background: #ccc;
+  color: #000;
+  padding: 0.2em 0;
+}
+
+.add-button {
+  font-size: 25px;
+  text-decoration: none;
+}
+.delete-button {
+  font-size: 25px;
+  text-decoration: none;
+  color: red;
+}
+
+.dropdown {
+  width: 100%;
+  height: 34px;
+  overflow: hidden;
+  border: 1px solid #ccc;
+}
+
+.nwau-total {
+  display: inline-block;
+  font-size: 225%;
+  margin: 0 20px 10px 20px;
+}
+.nwau-total > label {
+  font-size: 16px;
+}
+
+
+.panel-title {
+  font-size: ceil($font-size-base * 1.5);
+}
+.panel-title-big {
+  font-size: ceil($font-size-base * 2)
+}
+.panel-heading,
+.panel-primary > .panel-heading{
+  color: $body-bg;
+}
+
+.panel-heading > h3 {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.panel-acute {
+  border-color: $panel-acute-border
+}
+.panel-acute > .panel-heading {
+  background-color: $panel-acute-heading-bg;
+  border-bottom-color: $panel-acute-border;
+}
+
+.panel-edudg {
+  border-color: $panel-edudg-border
+}
+.panel-edudg > .panel-heading {
+  background-color: $panel-edudg-heading-bg;
+  border-bottom-color: $panel-edudg-border;
+}
+
+.panel-edurg {
+  border-color: $panel-edurg-border
+}
+.panel-edurg > .panel-heading {
+  background-color: $panel-edurg-heading-bg;
+  border-bottom-color: $panel-edurg-border;
+}
+
+.panel-snap {
+  border-color: $panel-snap-border
+}
+.panel-snap > .panel-heading {
+  background-color: $panel-snap-heading-bg;
+  border-bottom-color: $panel-snap-border;
+}
+
+.panel-non-admitted {
+  border-color: $panel-non-admitted-border
+}
+.panel-non-admitted > .panel-heading {
+  background-color: $panel-non-admitted-heading-bg;
+  border-bottom-color: $panel-non-admitted-border;
+}
+
+.dropdown-menu {
+  top: inherit;
+  z-index: 2001;
+}
+.dropdown-toggle {
+  margin-bottom: 1px;
+}
+
+.add-encounter-btn {
+  font-size: 130%;
+  margin-top: 50px;
+}
+.add-encounter-btn > a {
+  font-size: 100px;
+  display: block;
+}
+.add-encounter-btn > .glyphicon:empty {
+  width: 100%;
+}
+
+.control-label {
+  width: 100%;
+}
+.inline-input {
+  overflow: hidden;
+}
+.help-button {
+  font-size: 20px;
+  margin: 0 0 0 3px;
+}
+.help-button.pull-right {
+  margin: 5px 0 0 5px;
+}
+
+.warning-sign > .help-button {
+  margin-right: 10px;
+}
+
+.form-group > button.pull-right,
+.form-group * button.pull-right {
+  margin: 0 0 0 5px;
+}
+
+
+.edit-journey-content {
+  margin-top: 20px;
+}
+
+#age, #lengthOfStay, #icuHours, #service-events {
+  width: 100px;
+}
+
+.page-margin{
+  padding: 10px 10px 0 10px;
+}
+.page-margin > .row {
+  margin: 0;
+}
+
+.modal-header,
+.modal-footer {
+  background-color: $navbar-default-bg;
+  color: #fff;
+}
+.modal-body p {
+  font-size: 120%;
+}
+
+
+.encounter-summary-cares {
+  min-height: 82px;
+}
+.encounter-summary-los {
+  min-height: 58px;
+}
+
+
+.add-journey-plus-sign {
+  font-size: 18px;
+}
+
+.warning-margin {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.list-group {
+  word-break: break-word;
+}
+
+#main-view > .row {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.table > tbody + tbody {
+  border-top: 0;
+}
+
+.btn-group > button,
+.btn-group > label {
+  background-color: $btn-group-bg;
+  border-color: darken($btn-group-bg, 10%);
+}
+
+.btn-group > label.checked {
+  background-color: #3276b1;
+  border-color: #285e8e;
+}
+
+.navbar-btn {
+  height: 34px;
+}
+
+.green {
+  color: green;
+}
+
+.fixed {
+  position: fixed;
+  text-align: center;
+}
+
+
+input[type="search"] {
+  -webkit-appearance: searchfield;
+}
+
+input[type="search"]::-webkit-search-cancel-button {
+  -webkit-appearance: searchfield-cancel-button;
+}
+
+#footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  text-align: right;
+  background-color: $navbar-default-bg;
+  color: $nav-text-color;
+}
+
+.compare-button {
+  margin-left: 10px;
+}
+
+.dropdown-menu {
+  max-height: 200px;
+  overflow-y: scroll;
+}
+
+.warning-sign a{
+  color: #ff8c00;
+  margin: 0 10px 0 0;
+  font-size: 20px;
+}

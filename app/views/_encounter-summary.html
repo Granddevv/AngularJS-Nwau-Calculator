@@ -1,0 +1,85 @@
+<div class="panel encounter-summary"
+     ng-class="{
+     'panel-acute': encounter.classification === 'Acute Admitted',
+     'panel-snap': encounter.classification === 'SNAP',
+     'panel-edudg': encounter.classification === 'Emergency Department UDG',
+     'panel-edurg': encounter.classification === 'Emergency Department URG',
+     'panel-non-admitted': encounter.classification === 'Non Admitted'
+     }">
+    <div class="panel-heading">
+        <h3 class="panel-title">{{ encounter.classification }}</h3>
+    </div>
+    <div class="panel-body">
+        <div id="encounter-{{ journey.id }}-{{ encounter.id }}-chart"
+             class="stacked-bar-chart summary-column">
+            <waterfall-chart container-id="encounter-{{ journey.id }}-{{ encounter.id }}-chart" type="stackedbar"
+                             data="chartValues"></waterfall-chart>
+        </div>
+
+        <div class="summary-column">
+            <div ng-if="encounter.classification==='Acute Admitted'"
+                 class="summary-value summary-full-width">
+                <strong>DRG</strong>
+
+                <p>{{ encounter.drg.name }}</p>
+            </div>
+            <div ng-if="encounter.classification==='SNAP'"
+                 class="summary-value summary-full-width">
+                <strong>AN-SNAP</strong>
+
+                <p>{{ encounter.ansnap.name }}</p>
+            </div>
+            <div ng-if="encounter.classification==='Emergency Department URG'"
+                 class="summary-value summary-full-width">
+                <strong>URG</strong>
+
+                <p>{{ encounter.edurg.name }}</p>
+            </div>
+            <div ng-if="encounter.classification==='Emergency Department UDG'"
+                 class="summary-value summary-full-width">
+                <strong>UDG</strong>
+
+                <p>{{ encounter.edudg.name }}</p>
+            </div>
+            <div ng-if="encounter.classification==='Non Admitted'"
+                 class="summary-value summary-full-width">
+                <strong>Tier 2 Clinic</strong>
+
+                <p>{{ encounter.tier2clinic.name }}</p>
+            </div>
+
+            <div class="encounter-summary-los summary-value summary-full-width">
+                <div ng-if="encounter.classification==='Acute Admitted' || encounter.classification=='SNAP'">
+                    <strong>Length of Stay</strong>
+
+                    <p>
+                        <ng-pluralize count="encounter.lengthOfStay"
+                                      when="{'1': '{} day',
+                                             'other': '{} days'}">
+                        </ng-pluralize>
+                    </p>
+                </div>
+                <div ng-if="encounter.classification === 'Non Admitted'">
+                    <strong>Service Events</strong>
+
+                    <p>
+                        <ng-pluralize count="encounter.serviceEvents"
+                                      when="{'1': '{} event',
+                                             'other': '{} events'}">
+                        </ng-pluralize>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="nwau-value">
+            <strong>NWAU{{ journey.nwauVersion % 100 }}</strong>
+
+            <p>{{ (encounter.nwauCalculation.adjustedNwau || encounter.nwauCalculation.nwau) | number: 4 }}</p>
+        </div>
+        <div class="nwau-value">
+            <strong>Funding</strong>
+
+            <p>${{ (encounter.nwauCalculation.adjustedPrice || encounter.nwauCalculation.price) | number: 0 }}</p>
+        </div>
+    </div>
+</div>

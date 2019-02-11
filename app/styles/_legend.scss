@@ -1,0 +1,149 @@
+.legend-item {
+  width: 30px;
+  min-width: 30px;
+  min-height: 20px;
+  border: 2px solid #000;
+  float: left;
+}
+
+.chart-value-inactive {
+  color: #D0D0D0;
+}
+
+.legend-item-inactive {
+  border: none;
+  background-color: inherit !important;
+}
+
+.nwau-values > .legend-item {
+  margin-top: 20px;
+}
+
+.NationalAverage-los{
+  float: left;
+  margin-right: 15px;
+  background-color: orange;
+
+}
+
+.StateAverage-los{
+  margin-right: 15px;
+  background-color: purple;
+}
+
+.public-los {
+  margin-right: 15px;
+  background-color:blue;
+}
+.private-los {
+  margin-right: 15px;
+  background-color: red;
+}
+
+tr.total-row {
+  font-weight: bold;
+}
+td .short-stay {
+  background-color: $short-stay;
+}
+td .inlier {
+  background-color: $inlier;
+}
+td .long-stay {
+  background-color: $long-stay;
+}
+td .total {
+  background-color: $total;
+}
+td .remoteness {
+  background-color: $remoteness;
+}
+td .paediatric {
+  background-color: $paediatric;
+}
+td .indigenous {
+  background-color: $indigenous;
+}
+td .specialist-psych-age {
+  background-color: $specialist-psych-age;
+}
+td .radiotherapy {
+  background-color: $radiotherapy;
+}
+td .dialysis {
+  background-color: $dialysis;
+}
+td .multidisciplinaryteams {
+  background-color: $multidisciplinaryteams;
+}
+td .intensive-care-unit {
+  background-color: $intensive-care-unit;
+}
+td .private-accommodation {
+  background-color: $private-accommodation;
+}
+td .private-service {
+  background-color: $private-service;
+}
+td .emergency-care-age {
+  background-color: $emergency-care-age;
+}
+td .sep {
+  background-color: $sep;
+}
+td .price-weight {
+  background-color: $price-weight;
+}
+
+.short-stay {
+  color: $short-stay;
+}
+.inlier {
+  color: $inlier;
+}
+.long-stay {
+  color: $long-stay;
+}
+.total {
+  color: $total;
+}
+.remoteness {
+  color: $remoteness;
+}
+.paediatric {
+  color: $paediatric;
+}
+.indigenous {
+  color: $indigenous;
+}
+.multidisciplinaryteams {
+  color: $multidisciplinaryteams;
+}
+.specialist-psych-age {
+  color: $specialist-psych-age;
+}
+.radiotherapy {
+  color: $radiotherapy;
+}
+.dialysis {
+  color: $dialysis;
+}
+.intensive-care-unit {
+  color: $intensive-care-unit;
+}
+.private-accommodation {
+  color: $private-accommodation;
+}
+.private-service {
+  color: $private-service;
+}
+.emergencyCareAge {
+  color: $emergency-care-age;
+}
+
+.sep {
+  color: $sep;
+}
+.price-weight {
+  color: $price-weight;
+}

@@ -1,0 +1,106 @@
+{ "SpecifiedICUs":[ 
+{
+"State": "NSW",
+"ICUEligibleHospitals": "D227",
+"facility_name": "Bankstown-Lidcombe Hospital"}, 
+{
+"State": "NSW",
+"ICUEligibleHospitals": "D203",
+"facility_name": "Blacktown Hospital"}, 
+{
+"State": "NSW",
+"ICUEligibleHospitals": "Q211",
+"facility_name": "Calvary Mater Newcastle"}, 
+{
+"State": "NSW",
+"ICUEligibleHospitals": "H208",
+"facility_name": "Coffs Harbour Health Campus"}, 
+{
+"State": "NSW",
+"ICUEligibleHospitals": "A237",
+"facility_name": "Concord Repatriation General Hospital"}, 
+{
+"State": "NSW",
+"ICUEligibleHospitals": "B202",
+"facility_name": "Gosford Hospital"}, 
+{
+"State": "NSW",
+"ICUEligibleHospitals": "B210",
+"facility_name": "Hornsby Ku-Ring-Gai Hospital"}, 
+{
+"State": "NSW",
+"ICUEligibleHospitals": "Q230",
+"facility_name": "John Hunter Hospital"}, 
+{
+"State": "NSW",
+"ICUEligibleHospitals": "H214",
+"facility_name": "Lismore Base Hospital"}, 
+{
+"State": "NSW",
+"ICUEligibleHospitals": "D209",
+"facility_name": "Liverpool Hospital"}, 
+{
+"State": "NSW",
+"ICUEligibleHospitals": "D210",
+"facility_name": "Nepean Hospital"}, 
+{
+"State": "NSW",
+"ICUEligibleHospitals": "L216",
+"facility_name": "Orange Base Hospital"}, 
+{
+"State": "NSW",
+"ICUEligibleHospitals": "H272",
+"facility_name": "Port Macquarie Base Hospital"}, 
+{
+"State": "NSW",
+"ICUEligibleHospitals": "C208",
+"facility_name": "Prince of Wales Hospital"}, 
+{
+"State": "NSW",
+"ICUEligibleHospitals": "B218",
+"facility_name": "Royal North Shore Hospital"}, 
+{
+"State": "NSW",
+"ICUEligibleHospitals": "A208",
+"facility_name": "Royal Prince Alfred Hospital"}, 
+{
+"State": "NSW",
+"ICUEligibleHospitals": "C213",
+"facility_name": "St George Hospital (NSW)"}, 
+{
+"State": "NSW",
+"ICUEligibleHospitals": "A212",
+"facility_name": "St Vincent's Hospital (Darlinghurst)"}, 
+{
+"State": "NSW",
+"ICUEligibleHospitals": "C238",
+"facility_name": "Sydney Children's Hospital"}, 
+{
+"State": "NSW",
+"ICUEligibleHospitals": "J216",
+"facility_name": "Tamworth Hospital"}, 
+{
+"State": "NSW",
+"ICUEligibleHospitals": "A207",
+"facility_name": "The Children's Hospital At Westmead"}, 
+{
+"State": "NSW",
+"ICUEligibleHospitals": "C214",
+"facility_name": "The Sutherland Hospital"}, 
+{
+"State": "NSW",
+"ICUEligibleHospitals": "H223",
+"facility_name": "The Tweed Hospital"}, 
+{
+"State": "NSW",
+"ICUEligibleHospitals": "R219",
+"facility_name": "Wagga Wagga Base Hospital"}, 
+{
+"State": "NSW",
+"ICUEligibleHospitals": "D224",
+"facility_name": "Westmead Hospital"}, 
+{
+"State": "NSW",
+"ICUEligibleHospitals": "P208",
+"facility_name": "Wollongong Hospital"}
+]}

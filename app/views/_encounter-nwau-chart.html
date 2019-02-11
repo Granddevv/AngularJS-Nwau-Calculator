@@ -1,0 +1,51 @@
+<div id="encounter-nwau-calculations" class="page-margin">
+    <div id="encounterNwau" class="chart-area col-md-6 col-xs-12">
+        <waterfall-chart container-id="encounterNwau" type="waterfall" data="chartValues"></waterfall-chart>
+    </div>
+    <div class="col-md-6 col-xs-12">
+        <table class="table table-hover table-condensed">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Price Weight</th>
+                    <th>Value</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-if="encounter.classification==='Acute Admitted' || encounter.classification==='SNAP'" chart-value type="short-stay" caption="Short Stay Outlier" value="encounter.nwauCalculation.adjustments.shortStay | numberWholeZero:4"></tr>
+                <tr ng-if="encounter.classification==='Acute Admitted' || encounter.classification==='SNAP'" chart-value type="inlier" caption="Inlier" value="encounter.nwauCalculation.PW | numberWholeZero:4"></tr>
+                <tr ng-if="encounter.classification==='Acute Admitted' || encounter.classification==='SNAP'" chart-value type="long-stay" caption="Long Stay Outlier" value="encounter.nwauCalculation.adjustments.longStay | numberWholeZero:4"></tr>
+                <tr ng-if="encounter.classification!=='Acute Admitted' && encounter.classification!=='SNAP'" chart-value type="inlier" caption="Inlier" value="encounter.nwauCalculation.PW | numberWholeZero:4"></tr>
+                <tr ng-if="encounter.classification==='Acute Admitted' || encounter.classification==='SNAP'" chart-value inactive-legend="true" caption="Total" value="encounter.nwauCalculation.PWactual | numberWholeZero:4"></tr>
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Adjustments</th>
+                        <th></th>
+                    </tr>
+                </thead>
+            </tbody>
+            <tbody>
+                <tr ng-if="encounter.classification === 'SNAP' && journey.nwauVersion < 2015 || encounter.classification === 'Acute Admitted' || (encounter.ansnap.episodeType=='Rehabilitation' || encounter.ansnap.episodeType=='Maintenance') && (encounter.ansnap.healthType=='Mental Health')" chart-value type="paediatric" caption="Paediatric" value="encounter.nwauCalculation.adjustments.paediatric | numberWholeZero:4"></tr>
+                <tr ng-if="encounter.classification==='Acute Admitted'" chart-value type="specialist-psych-age" caption="Specialist Psych. Age (SPA)" value="encounter.nwauCalculation.adjustments.psychiatric | numberWholeZero:4"></tr>
+
+                <tr chart-value type="indigenous" caption="Indigenous" value="encounter.nwauCalculation.adjustments.indigenous | numberWholeZero:4"></tr>
+
+                <!--Mark -->
+                <tr ng-if="encounter.classification==='Emergency Department URG' || encounter.classification==='Emergency Department UDG'" chart-value type="emergency-care-age" caption="Emergency Care Age" value="encounter.nwauCalculation.adjustments.emergcareage | numberWholeZero:4"></tr>
+
+                <tr ng-if="encounter.classification==='Acute Admitted' || encounter.classification==='SNAP'" chart-value type="remoteness" caption="Remoteness" value="encounter.nwauCalculation.adjustments.remoteness | numberWholeZero:4"></tr>
+
+                <tr ng-if="encounter.classification==='Acute Admitted'" chart-value type="radiotherapy" caption="Radiotherapy" value="encounter.nwauCalculation.adjustments.radiotherapy | numberWholeZero:4"></tr>
+                <tr ng-if="encounter.classification==='Acute Admitted' && journey.nwauVersion>2014 && encounter.drg.id!=='L61Z' && encounter.drg.id!=='L68Z'" chart-value type="dialysis" caption="Dialysis" value="encounter.nwauCalculation.adjustments.dialysis | numberWholeZero:4"></tr>
+                <tr ng-if="encounter.classification==='Non Admitted' && journey.nwauVersion >2014" chart-value type="multidisciplinaryteams" caption="Multidisciplinary Clinic" value="encounter.nwauCalculation.adjustments.multidisciplinaryteams | numberWholeZero:4"></tr>
+                <tr ng-if="encounter.classification==='Acute Admitted'" chart-value type="intensive-care-unit" caption="Intensive Care Unit (ICU)" value="encounter.nwauCalculation.adjustments.ICU | numberWholeZero:4"></tr>
+                <tr ng-if="encounter.classification==='Acute Admitted' || encounter.classification==='SNAP'" chart-value type="private-service" caption="Private Patient Service (PPS)" value="encounter.nwauCalculation.adjustments.PPS | numberWholeZero:4"></tr>
+                <tr ng-if="encounter.classification==='Acute Admitted' || encounter.classification==='SNAP'" chart-value type="private-accommodation" caption="Private Patient Accommodation (ACC)" value="encounter.nwauCalculation.adjustments.ACC | numberWholeZero:4"></tr>
+            </tbody>
+            <tbody>
+                <tr chart-value type="total" caption="NWAU{{ journey.nwauVersion % 100 }}" value="encounter.nwauCalculation.nwau | numberWholeZero:4" class="total-row"></tr>
+            </tbody>
+        </table>
+    </div>
+</div>

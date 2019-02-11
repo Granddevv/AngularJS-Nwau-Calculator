@@ -1,0 +1,28 @@
+<script type="text/ng-template" id="help-modal.html">
+    <div class="modal-header">
+        <h3 class="modal-title">{{ help.title }}</h3>
+    </div>
+    <div class="modal-body">
+        <p ng-bind-html='help.text'></p>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-click="close()">Close</button>
+    </div>
+</script>
+
+<nav-bar>
+    <nav-bar-title ng-init="title = 'NSW Health NWAU Calculator'" text="title"></nav-bar-title>
+</nav-bar>
+<div class="page-margin">
+    <div class="col-xs-12 col-md-6 pull-right">
+        <a ng-repeat="help in helps"
+           ng-click="showHelp(help)"
+           class="col-xs-12 text-center">
+            <h3>{{ help.title }}</h3>
+        </a>
+    </div>
+    <journey-list class="col-xs-12 col-md-6 pull-left"></journey-list>
+</div>
+<footer id="footer">
+    v2.7&nbsp;
+</footer>
